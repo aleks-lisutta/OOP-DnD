@@ -2,6 +2,7 @@ package GameControl;
 import Entity.Tile.Empty;
 import Entity.Tile.Tile;
 import Entity.Player.Player;
+import Entity.Tile.Unit;
 import Entity.Tile.Wall;
 
 public class Utils {
@@ -10,8 +11,9 @@ public class Utils {
         double y=(a.getPosY().doubleValue()+b.getPosY().doubleValue());
         return y/x;
     }
-    public static boolean isDead(Player p){
-        return false;///////////////////////////////////////////////////////////////
+    public static boolean isDead(Tile t){
+        if(t.chr=='X') return true;
+        return false;
     }
     public static Tile getTile(char c ,int x, int y){
         switch (c){

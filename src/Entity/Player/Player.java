@@ -18,9 +18,12 @@ public abstract class Player extends Unit implements Heroic {
         nextExp=100;
     }
     public String move(Tile t){
-        String output="player try to move.\n";
+        String output=name+" tried to move to position "+t.pos+".\n";
         output+=t.reciveMove(this);
         return output;
-
+    }
+    protected String die(){
+        chr='X';
+        return super.die();
     }
 }

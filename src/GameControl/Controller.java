@@ -1,6 +1,7 @@
 package GameControl;
 
 import Entity.Player.Player;
+import Entity.Tile.Empty;
 import Entity.Tile.Tile;
 import GameControl.Utils;
 
@@ -92,7 +93,10 @@ public class Controller {
         chenge.append(player.move(move));
         //////////////////////////////chenge.append(enemyTurn();
         newPos.add(player);
-        newPos.add(move);
+        if(Utils.isDead(move))
+            newPos.add(new Empty(move.getPosX(),move.getPosY()));
+        else newPos.add(move);
+
        ////// newpos.add(EnemyMove)
         curBoard.setPos(newPos);
         return chenge.toString();
