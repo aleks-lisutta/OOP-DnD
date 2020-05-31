@@ -1,4 +1,4 @@
-package Entity.Resource_based;
+package Resource_based;
 
 public class Health extends Resource {
     public Health(int max){

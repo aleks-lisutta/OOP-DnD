@@ -1,6 +1,6 @@
 package Entity.Tile;
 
-import Entity.Resource_based.Health;
+import Resource_based.Health;
 
 public abstract class Unit extends Tile {
     public String name;
