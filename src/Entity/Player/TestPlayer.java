@@ -9,6 +9,7 @@ public class TestPlayer extends Player {
     static final int d=3;
     public TestPlayer(int x, int y) {
         super(x, y, a, d);
+        name="test";
     }
 
     @Override

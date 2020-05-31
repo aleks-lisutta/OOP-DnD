@@ -8,4 +8,16 @@ public abstract class Tile {
         pos=new Pos(x,y);
     }
     public abstract String reciveMove(Unit u);
+    public Integer getPosX(){
+        return pos.x;
+    }
+    public Integer getPosY(){
+        return pos.y;
+    }
+    public String toString(){
+        return ""+chr;
+    }
+    public void setPos(int x, int y){
+        pos=new Pos(x,y);
+    }
 }

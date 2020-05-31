@@ -11,22 +11,22 @@ public class Service {
 
     public Service(){
         menu= new Menu();
-        con=new Controller();
-        con.loadBoards();
         scan=new Scanner(System.in);
         choosePlayer();
-
+        startGame();
     }
     public void choosePlayer(){
         System.out.println(menu.options());
-        con.setPlayer(menu.getPlayer(scan.nextLine()));
+        con=new Controller(menu.getPlayer(scan.nextLine()));
     }
     
     public void startGame(){
-        while(!con.player.isDead() & !con.finish()){
+        String output="";
+        while(!con.finish()){
             System.out.println(con.display());
-            con.action(scan.nextLine());
+            output=con.action(scan.nextLine());
             con.enemyTurn();
+            System.out.println(output);/////////////////////////////////////
         }
     }
 }
