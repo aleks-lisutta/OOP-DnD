@@ -5,7 +5,7 @@ import Entity.Tile.Unit;
 
 import java.util.List;
 
-public class Hunter extends Player {
+public abstract class Hunter extends Player {
     public Hunter(int att, int def, String name, int HP) {
         super(att, def, name, HP);
     }

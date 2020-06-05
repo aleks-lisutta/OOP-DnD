@@ -81,12 +81,8 @@ public class Controller {
     }
 
     public String action(String actionChar){
-        if (actionChar.length()>1){
-            try {
-                throw new Exception("the action is illegal.");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (actionChar==null|| actionChar.length()!=1){
+            throw new IllegalArgumentException("the action is illegal.");
         }
         Tile move=curBoard.moveTo(player,actionChar.charAt(0));
         StringBuilder chenge=new StringBuilder();
@@ -94,9 +90,10 @@ public class Controller {
         chenge.append(player.move(move));
         //////////////////////////////chenge.append(enemyTurn();
         newPos.add(player);
-        newPos.add(move);
+        if (move.isDead()) {newPos.add(new Empty(move.getPosX(), move.getPosY())); }
+        else { newPos.add(move); }
 
-       ////// newpos.add(EnemyMove)
+        ////// newpos.add(EnemyMove)
         curBoard.setPos(newPos);
         //curBoard.setPos(DeathLoop());
         //deadEnemy

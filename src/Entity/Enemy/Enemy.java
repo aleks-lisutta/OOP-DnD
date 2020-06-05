@@ -3,7 +3,7 @@ package Entity.Enemy;
 import Entity.Tile.Tile;
 import Entity.Tile.Unit;
 
-public class Enemy extends Unit {
+public abstract class Enemy extends Unit {
     int EXP;
 
     public Enemy(char c,int att, int def, int EXP,String name,int HP,int x,int y) {
@@ -12,11 +12,6 @@ public class Enemy extends Unit {
         setPos(x,y);
     }
     public void OnEnemyTurn(){}
-
-    public String reciveMove(Enemy e) {
-        return "";
-    }
-
 
     public String accExp() {
         return "";

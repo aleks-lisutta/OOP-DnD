@@ -4,7 +4,7 @@ import Entity.Enemy.Enemy;
 
 import java.util.Random;
 
-public class Monster extends Enemy {
+public abstract class Monster extends Enemy {
     public int vision_range;
     public boolean lock;
 

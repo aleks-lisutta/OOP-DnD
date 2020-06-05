@@ -5,7 +5,7 @@ import Entity.Tile.Unit;
 
 import java.util.List;
 
-public class Mage extends Player {
+public abstract class Mage extends Player {
     public Mage(int att, int def, String name, int HP) {
         super(att, def, name, HP);
     }

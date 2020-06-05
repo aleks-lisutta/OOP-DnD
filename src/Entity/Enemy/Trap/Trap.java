@@ -1,6 +1,7 @@
 package Entity.Enemy.Trap;
 
 import Entity.Enemy.Enemy;
+import Entity.Tile.Empty;
 import Entity.Tile.Tile;
 import Entity.Tile.Unit;
 
@@ -14,7 +15,7 @@ public abstract class Trap extends Enemy {
     public boolean visible;
     public Trap(char c,int att, int def, int EXP,String name,int HP,int x,int y) {
         super(c, att, def,EXP,name,HP,x,y);
-        chr2='.';
+        chr2= Empty.CHR;
         visible=true;
     }
     public void setUpVisibility(int a, int b){
@@ -26,14 +27,14 @@ public abstract class Trap extends Enemy {
         if (visible &now>visibility){
             now=now-visibility;
             visible=false;
-            swipChar();
+            swapChar();
             return  name+" changed Position, now "+name+ " is inVisibility.";
         }
         else if (!visible & now>inVisibility)
         {
             now=now-inVisibility;
             visible=true;
-            swipChar();
+            swapChar();
             return  name+" changed Position, now "+name+ " is Visibility.";
         }
         return "";
@@ -41,7 +42,7 @@ public abstract class Trap extends Enemy {
     public String move(Tile a){
         return SetStatus();
     }
-    public void swipChar(){
+    public void swapChar(){
         char temp=chr;
         chr=chr2;
         chr2=temp;

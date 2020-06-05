@@ -24,7 +24,11 @@ public class Service {
         String output="";
         while(!con.finish()){
             System.out.println(con.display());
-            output=con.action(scan.nextLine());
+            try {
+                output=con.action(scan.nextLine());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             con.enemyTurn();
             System.out.println(output);/////////////////////////////////////
         }

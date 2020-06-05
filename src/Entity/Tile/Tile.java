@@ -23,7 +23,7 @@ public abstract class Tile {
     public String toString(){
         return ""+chr;
     }
-
+    public abstract boolean isDead();
     public void setPos(int x, int y){
         pos=new Pos(x,y);
     }
@@ -31,7 +31,7 @@ public abstract class Tile {
     public void setPos(Pos p){
         pos=new Pos(p.x,p.y);
     }
-    public void swipPos(Tile t){
+    public void swapPos(Tile t){
         Pos temp=pos;
         pos=t.pos;
         t.pos=temp;

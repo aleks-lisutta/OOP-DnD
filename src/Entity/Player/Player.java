@@ -17,7 +17,7 @@ public abstract class Player extends Unit implements Heroic {
         nextExp=100;
     }
     public String levelUp(){
-        exp=exp-(lvl*50);
+        exp=exp-(nextExp);
         lvl+=1;
         setUpAbilityLevel();
         String output=name+" level up to "+lvl+ ", details: \n Attack: "+att+"     Defense: "+def +"exp: "+exp
@@ -31,9 +31,9 @@ public abstract class Player extends Unit implements Heroic {
         output+=checkLevelUp();
         return output;
     }
-    protected String die(){
+    protected String die(Unit u){
         chr='X';
-        return super.die();
+        return super.die(u);
     }
     private void setUpNextLevel(){
         nextExp=lvl*50;
