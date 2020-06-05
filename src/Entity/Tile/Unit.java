@@ -20,6 +20,9 @@ public abstract class Unit extends Tile {
     public String move(Tile t){
         return t.reciveMove(this);
     }
+    public String move(TileFrame t){
+        return t.reciveMove(this);
+    }
 
     @Override
     public String reciveMove(Unit u) {

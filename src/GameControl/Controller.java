@@ -3,6 +3,7 @@ package GameControl;
 import Entity.Player.Player;
 import Entity.Tile.Empty;
 import Entity.Tile.Tile;
+import Entity.Tile.TileFrame;
 import GameControl.Utils;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class Controller {
         player=p;
         loadBoards();
         curBoard=levels.get(0);
-        player.setPos(curBoard.getPlayerPos());
+        player.setPos(curBoard.getPlayerFrame().pos);
     }
 
     public void loadBoards() {
@@ -80,28 +81,29 @@ public class Controller {
         return curBoard.display();
     }
 
+    private boolean isMove(char c){
+        return c=='a'|c=='s'|c=='d'|c=='w';
+    }
     public String action(String actionChar){
         if (actionChar==null|| actionChar.length()!=1){
             throw new IllegalArgumentException("the action is illegal.");
         }
-        Tile move=curBoard.moveTo(player,actionChar.charAt(0));
-        StringBuilder chenge=new StringBuilder();
-        LinkedList<Tile> newPos=new LinkedList<>();
-        chenge.append(player.move(move));
-        //////////////////////////////chenge.append(enemyTurn();
-        newPos.add(player);
-        if (move.isDead()) {newPos.add(new Empty(move.getPosX(), move.getPosY())); }
-        else { newPos.add(move); }
-
-        ////// newpos.add(EnemyMove)
-        curBoard.setPos(newPos);
-        //curBoard.setPos(DeathLoop());
-        //deadEnemy
-        return chenge.toString();
+        List<TileFrame> targets=curBoard.action(player,actionChar.charAt(0));
+        StringBuilder log=new StringBuilder();
+        if(isMove(actionChar.charAt(0))) log.append(moveAct(targets.get(0)));
+        else {
+            /////// abilities
+        }
+        return log.toString();
     }
-    public List<Tile> DeathLoop(){
-        ///////////////////////////////////////////////////////////////////
-        return null;
+    private String moveAct(TileFrame tr){
+        String out=player.move(tr);
+        if(curBoard.getPlayerFrame().pos.x!=player.pos.x | curBoard.getPlayerFrame().pos.y!=player.pos.y){
+            curBoard.getPlayerFrame().tile=tr.tile;
+            tr.tile=player;
+            curBoard.setPlayerFrame(tr);
+        }
+        return out;
     }
 
     public String enemyTurn() {

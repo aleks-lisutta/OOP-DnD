@@ -2,15 +2,16 @@ package GameControl;
 import Entity.Player.Player;
 import Entity.Tile.Pos;
 import Entity.Tile.Tile;
+import Entity.Tile.TileFrame;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class Board {
-    private Tile[][] boardArray;
+    private TileFrame[][] boardArray;
     private int sizeX;
     private int sizeY;
-    private Pos playerPos;
+    private TileFrame playerFrame;
 
     public Board(){
     }
@@ -23,35 +24,43 @@ public class Board {
         }
         return output.toString();
     }
-    public void setPos(List<Tile> tiles) {
-        for (Tile tile : tiles) {
-            boardArray[tile.getPosX()][tile.getPosY()] = tile;
-        }
-    }
-    public Tile moveTo(Tile tile,char c){
+//    public void setPos(List<Tile> tiles) {
+//        for (Tile tile : tiles) {
+//            boardArray[tile.getPosX()][tile.getPosY()] = tile;
+//        }
+//    }
+    public List<TileFrame> action(Tile tile,char c){
+        List<TileFrame> out=new LinkedList<>();
         if (c=='a' && tile.getPosY()>0)
-            return boardArray[tile.getPosX()][tile.getPosY()-1];
+            out.add(boardArray[tile.getPosX()][tile.getPosY()-1]);
         if (c=='d' && tile.getPosY()<sizeY-1)
-            return boardArray[tile.getPosX()][tile.getPosY()+1];
+            out.add( boardArray[tile.getPosX()][tile.getPosY()+1]);
         if (c=='w' && tile.getPosX()>0)
-            return boardArray[tile.getPosX()-1][tile.getPosY()];
+            out.add( boardArray[tile.getPosX()-1][tile.getPosY()]);
         if (c=='s' && tile.getPosX()<sizeX-1)
-            return boardArray[tile.getPosX()+1][tile.getPosY()];
-        return null;
+            out.add( boardArray[tile.getPosX()+1][tile.getPosY()]);
+        return out;
     }
     public void Load(List<String> lines, Player player){
-        boardArray=new Tile[lines.size()][lines.get(0).length()];
+        boardArray=new TileFrame[lines.size()][lines.get(0).length()];
         for (int i=0; i<lines.size();i++) {
             for (int j = 0; j < lines.get(i).length(); j++) {
-                boardArray[i][j] = Utils.getTile(lines.get(i).charAt(j), i, j);
-                if (boardArray[i][j]==null) {boardArray[i][j]=player;
-                playerPos=new Pos(i,j);}
+                boardArray[i][j] = new TileFrame(Utils.getTile(lines.get(i).charAt(j), i, j),new Pos(i,j));
+                if (boardArray[i][j].tile==null)
+                {
+                    boardArray[i][j].tile=player;
+                    playerFrame=boardArray[i][j];
+                }
             }
         }
         sizeX=lines.size();
         sizeY=lines.get(0).length();
     }
-    public Pos getPlayerPos(){
-        return playerPos;
+    public TileFrame getPlayerFrame(){
+        return playerFrame;
+    }
+
+    public void setPlayerFrame(TileFrame playerFrame) {
+        this.playerFrame = playerFrame;
     }
 }
