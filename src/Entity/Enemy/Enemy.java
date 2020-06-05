@@ -18,7 +18,6 @@ public class Enemy extends Unit {
     }
 
 
-    @Override
     public String accExp() {
         return "";
     }

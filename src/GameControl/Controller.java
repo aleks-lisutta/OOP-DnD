@@ -30,6 +30,7 @@ public class Controller {
         player=p;
         loadBoards();
         curBoard=levels.get(0);
+        player.setPos(curBoard.getPlayerPos());
     }
 
     public void loadBoards() {

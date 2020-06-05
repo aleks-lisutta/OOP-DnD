@@ -23,9 +23,11 @@ public abstract class Tile {
     public String toString(){
         return ""+chr;
     }
+
     public void setPos(int x, int y){
         pos=new Pos(x,y);
     }
+
     public void setPos(Pos p){
         pos=new Pos(p.x,p.y);
     }

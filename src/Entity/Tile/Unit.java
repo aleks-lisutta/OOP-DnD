@@ -32,7 +32,7 @@ public abstract class Unit extends Tile {
         }
         if(hp.getCur()==0) {
             out+=die();
-            swipPos(u);
+            swipPos(u);/////////////////////////////
         }
         return out;
     }
@@ -43,6 +43,6 @@ public abstract class Unit extends Tile {
     public void setHp(int n){
         hp=new Health(n);
     }
-    public String getExp(Unit u){return u.accExp();}
-    public abstract String accExp();
+ //   public String getExp(Unit u){return u.accExp();}//////////////////////////////
+ //   public abstract String accExp();/////////////////////////////
 }

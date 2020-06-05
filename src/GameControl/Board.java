@@ -1,5 +1,6 @@
 package GameControl;
 import Entity.Player.Player;
+import Entity.Tile.Pos;
 import Entity.Tile.Tile;
 
 import java.util.LinkedList;
@@ -9,6 +10,7 @@ public class Board {
     private Tile[][] boardArray;
     private int sizeX;
     private int sizeY;
+    private Pos playerPos;
 
     public Board(){
     }
@@ -43,10 +45,13 @@ public class Board {
             for (int j = 0; j < lines.get(i).length(); j++) {
                 boardArray[i][j] = Utils.getTile(lines.get(i).charAt(j), i, j);
                 if (boardArray[i][j]==null) {boardArray[i][j]=player;
-                player.setPos(i,j);}
+                playerPos=new Pos(i,j);}
             }
         }
         sizeX=lines.size();
         sizeY=lines.get(0).length();
+    }
+    public Pos getPlayerPos(){
+        return playerPos;
     }
 }
