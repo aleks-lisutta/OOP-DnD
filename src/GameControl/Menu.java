@@ -1,11 +1,16 @@
 package GameControl;
+import Entity.Player.Hunter.Ygritte;
+import Entity.Player.Mages.Melisandre;
+import Entity.Player.Mages.ThorosOfMyr;
 import Entity.Player.Player;
-import Entity.Player.TestPlayer;
-import java.util.Arrays;
+import Entity.Player.Rogues.AryaStark;
+import Entity.Player.Rogues.Bronn;
+import Entity.Player.Warrior.JonSnow;
+import Entity.Player.Warrior.TheHound;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Menu {
 
@@ -13,7 +18,13 @@ public class Menu {
 
     public Menu(){
         playerList=new LinkedList<Player>();
-        playerList.add(new TestPlayer(0,0));
+        playerList.add(new JonSnow());
+        playerList.add(new TheHound());
+        playerList.add(new Melisandre());
+        playerList.add(new ThorosOfMyr());
+        playerList.add(new AryaStark());
+        playerList.add(new Bronn());
+        playerList.add(new Ygritte());
     }
     public String options() {
         StringBuilder output=new StringBuilder();

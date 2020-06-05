@@ -4,14 +4,18 @@ import Resource_based.Health;
 
 public abstract class Unit extends Tile {
     public String name;
+    public boolean isDead;
     public Health hp;
     public int att;
     public int def;
 
-    public Unit(int x, int y,  int att, int def){
-        super(x,y);
+    public Unit(char c,int att, int def,String name,int HP){
+        super(c);
         this.att=att;
         this.def=def;
+        isDead=false;
+        setHp(HP);
+        this.name=name;
     }
     public String move(Tile t){
         return t.reciveMove(this);
@@ -28,11 +32,17 @@ public abstract class Unit extends Tile {
         }
         if(hp.getCur()==0) {
             out+=die();
+            swipPos(u);
         }
         return out;
     }
     protected String die(){
-        chr='X';
+        isDead=true;
         return name+" died.";
     }
+    public void setHp(int n){
+        hp=new Health(n);
+    }
+    public String getExp(Unit u){return u.accExp();}
+    public abstract String accExp();
 }

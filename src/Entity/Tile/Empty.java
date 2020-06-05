@@ -1,15 +1,13 @@
 package Entity.Tile;
 
 public class Empty extends Tile {
-    public Empty(int x, int y){
-        super(x,y);
-        chr='.';
+    public Empty(int x,int y){
+        super('.');
+        setPos(x,y);
     }
     @Override
     public String reciveMove(Unit u) {
-        Pos t=u.pos;
-        u.pos=pos;
-        pos=t;
+        swipPos(u);
         return u.name+" walked to position "+u.pos;
     }
 }

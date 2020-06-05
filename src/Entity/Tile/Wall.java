@@ -1,9 +1,9 @@
 package Entity.Tile;
 
 public class Wall extends Tile {
-    public Wall(int x, int y){
-        super(x,y);
-        chr='#';
+    public Wall(int x,int y){
+        super('#');
+        setPos(x,y);
     }
     @Override
     public String reciveMove(Unit u) {

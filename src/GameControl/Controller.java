@@ -69,8 +69,8 @@ public class Controller {
         this.player=player;
     }
 
-    public boolean finish() {
-        if (Utils.isDead(player))
+    public boolean finish(){
+        if (player.isDead)
             return true;
         return false;
     }
@@ -93,13 +93,17 @@ public class Controller {
         chenge.append(player.move(move));
         //////////////////////////////chenge.append(enemyTurn();
         newPos.add(player);
-        if(Utils.isDead(move))
-            newPos.add(new Empty(move.getPosX(),move.getPosY()));
-        else newPos.add(move);
+        newPos.add(move);
 
        ////// newpos.add(EnemyMove)
         curBoard.setPos(newPos);
+        //curBoard.setPos(DeathLoop());
+        //deadEnemy
         return chenge.toString();
+    }
+    public List<Tile> DeathLoop(){
+        ///////////////////////////////////////////////////////////////////
+        return null;
     }
 
     public String enemyTurn() {

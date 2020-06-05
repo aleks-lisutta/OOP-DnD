@@ -21,7 +21,7 @@ public class Board {
         }
         return output.toString();
     }
-    public void setPos(LinkedList<Tile> tiles) {
+    public void setPos(List<Tile> tiles) {
         for (Tile tile : tiles) {
             boardArray[tile.getPosX()][tile.getPosY()] = tile;
         }
