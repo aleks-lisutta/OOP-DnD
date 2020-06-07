@@ -1,44 +1,39 @@
 package GameControl;
+import Entity.Enemy.Enemy;
 import Entity.Enemy.Monster.*;
 import Entity.Enemy.Trap.BonusTrap;
 import Entity.Enemy.Trap.DeathTrap;
 import Entity.Enemy.Trap.QueensTrap;
-import Entity.Tile.Empty;
-import Entity.Tile.Tile;
+import Entity.Tile.*;
 import Entity.Player.Player;
-import Entity.Tile.Unit;
-import Entity.Tile.Wall;
 
 public class Utils {
-    public static Double RANGE(Tile a, Tile b){
-        double x=(a.getPosX().doubleValue()+b.getPosX().doubleValue());
-        double y=(a.getPosY().doubleValue()+b.getPosY().doubleValue());
-        return y/x;
+    public static Double RANGE(TileFrame a, TileFrame b){
+        double x=(a.getx().doubleValue()-b.getx().doubleValue());
+        double y=(a.gety().doubleValue()-b.gety().doubleValue());
+        return Math.sqrt(x*x+y*y);
     }
-/*    public static boolean isDead(Tile t){
-        if(t.chr=='X') return true;
-        return false;
-    }*/
-    public static Tile getTile(char c,int x,int y){
+    public static Tuple getTile(char c){
         switch (c){
             case '.':
             case 'C':
             case 'K':
             case 'M':
-                return new Empty(x,y);
-            case  '#': return  new Wall(x,y);
-            case 's': return new Lannister_Solider(x,y);
-            case 'k': return new Lannister_Knight(x,y);
-            case 'q': return new Queens_Guard(x,y);
-            case 'z': return new Wright(x,y);
-            case 'b': return new BearWrigh(x,y);
-            case 'g': return new GiantWright(x,y);
-            case 'w': return new WhiteWalker(x,y);
-            case 'B': return new BonusTrap(x,y);
-            case 'Q': return new QueensTrap(x,y);
-            case 'D': return new DeathTrap(x,y);
-            case '@': return null;
+                return new Tuple(new Empty(),null);
+            case  '#': return new Tuple(new Wall(),null);
+            case 's': return new Tuple(new Lannister_Solider(),new Lannister_Solider());
+            case 'k': return new Tuple(new Lannister_Knight(),new Lannister_Knight());
+            case 'q': return new Tuple(new Queens_Guard(),new Queens_Guard());
+            case 'z': return new Tuple(new Wright(),new Wright());
+            case 'b': return new Tuple(new BearWrigh(),new BearWrigh());
+            case 'g': return new Tuple(new GiantWright(),new GiantWright());
+            case 'w': return new Tuple(new WhiteWalker(),new WhiteWalker());
+            case 'B': return new Tuple(new BonusTrap(),new BonusTrap());
+            case 'Q': return new Tuple(new QueensTrap(),new QueensTrap());
+            case 'D': return new Tuple(new DeathTrap(),new DeathTrap());
+            case '@': return new Tuple(null,null);
             default:throw new IllegalArgumentException(c+" char is illegal");
         }
     }
+
 }

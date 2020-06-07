@@ -1,15 +1,18 @@
 package Entity.Tile;
 
+import Entity.Player.Player;
+
 public class Empty extends Tile {
     public static char CHR='.';
-    public Empty(int x,int y){
+    public Empty(){
         super('.');
-        setPos(x,y);
+
     }
+
     @Override
     public String reciveMove(Unit u) {
-        swapPos(u);
-        return u.name+" walked to position "+u.pos;
+        swapFrame(u);
+        return u.name+" walked to position "+u.frame.pos+"\n";
     }
     @Override
     public boolean isDead(){

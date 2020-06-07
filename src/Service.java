@@ -29,8 +29,11 @@ public class Service {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            con.enemyTurn();
+            output+="\n";
+            output+=con.enemyTurn();
             System.out.println(output);/////////////////////////////////////
         }
+        System.out.println(con.display());
+        System.out.println("you died!");
     }
 }

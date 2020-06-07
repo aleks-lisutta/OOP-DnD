@@ -1,8 +1,10 @@
 package Entity.Enemy.Trap;
 
 import Entity.Enemy.Enemy;
+import Entity.Player.Player;
 import Entity.Tile.Empty;
 import Entity.Tile.Tile;
+import Entity.Tile.TileFrame;
 import Entity.Tile.Unit;
 
 import java.util.DoubleSummaryStatistics;
@@ -13,8 +15,8 @@ public abstract class Trap extends Enemy {
     public int inVisibility;
     public char chr2;
     public boolean visible;
-    public Trap(char c,int att, int def, int EXP,String name,int HP,int x,int y) {
-        super(c, att, def,EXP,name,HP,x,y);
+    public Trap(char c, int att, int def, int EXP, String name, int HP) {
+        super(c, att, def,EXP,name,HP);
         chr2= Empty.CHR;
         visible=true;
     }
@@ -48,7 +50,10 @@ public abstract class Trap extends Enemy {
         chr2=temp;
     }
     public String reciveMove(Unit u){
-        return visible ? super.reciveMove(u) : u.name+" can not move to Tile in position:" +pos+" there are a inVisibility Trap.";
+        return visible ? super.reciveMove(u) : u.name+" can not move to Tile in position:" +frame.pos+" there are a inVisibility Trap.";
     }
-
+    @Override
+    public String Tick(Player p) {
+        return "";
+    }
 }

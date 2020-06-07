@@ -1,4 +1,5 @@
 package GameControl;
+import Entity.Enemy.Enemy;
 import Entity.Player.Player;
 import Entity.Tile.Pos;
 import Entity.Tile.Tile;
@@ -29,32 +30,46 @@ public class Board {
 //            boardArray[tile.getPosX()][tile.getPosY()] = tile;
 //        }
 //    }
-    public List<TileFrame> action(Tile tile,char c){
+    public List<TileFrame> action(TileFrame frame,char c){
         List<TileFrame> out=new LinkedList<>();
-        if (c=='a' && tile.getPosY()>0)
-            out.add(boardArray[tile.getPosX()][tile.getPosY()-1]);
-        if (c=='d' && tile.getPosY()<sizeY-1)
-            out.add( boardArray[tile.getPosX()][tile.getPosY()+1]);
-        if (c=='w' && tile.getPosX()>0)
-            out.add( boardArray[tile.getPosX()-1][tile.getPosY()]);
-        if (c=='s' && tile.getPosX()<sizeX-1)
-            out.add( boardArray[tile.getPosX()+1][tile.getPosY()]);
+        if (c=='a' && frame.gety()>0)
+            out.add(boardArray[frame.getx()][frame.gety()-1]);
+        if (c=='d' && frame.gety()<sizeY-1)
+            out.add( boardArray[frame.getx()][frame.gety()+1]);
+        if (c=='w' && frame.getx()>0)
+            out.add( boardArray[frame.getx()-1][frame.gety()]);
+        if (c=='s' && frame.getx()<sizeX-1)
+            out.add( boardArray[frame.getx()+1][frame.gety()]);
         return out;
     }
-    public void Load(List<String> lines, Player player){
+    public List<Enemy> Load(List<String> lines, Player player){
         boardArray=new TileFrame[lines.size()][lines.get(0).length()];
+        List<Enemy> out=new LinkedList<>();
+
         for (int i=0; i<lines.size();i++) {
             for (int j = 0; j < lines.get(i).length(); j++) {
-                boardArray[i][j] = new TileFrame(Utils.getTile(lines.get(i).charAt(j), i, j),new Pos(i,j));
-                if (boardArray[i][j].tile==null)
-                {
-                    boardArray[i][j].tile=player;
-                    playerFrame=boardArray[i][j];
+                Tuple tup=Utils.getTile(lines.get(i).charAt(j));
+                Enemy e=tup.enemy;
+                if(e!=null) {
+                    out.add(e);
+                    boardArray[i][j] = new TileFrame(e,new Pos(i,j),this);
+                    e.setFrame(boardArray[i][j]);
+                }
+                else {
+                    Tile t = tup.tile;
+                    boardArray[i][j] = new TileFrame(t, new Pos(i, j), this);
+                    if (t != null) t.setFrame(boardArray[i][j]);
+                    else {
+                        boardArray[i][j].tile = player;
+                        playerFrame = boardArray[i][j];
+                        player.setFrame(playerFrame);
+                    }
                 }
             }
         }
         sizeX=lines.size();
         sizeY=lines.get(0).length();
+        return out;
     }
     public TileFrame getPlayerFrame(){
         return playerFrame;

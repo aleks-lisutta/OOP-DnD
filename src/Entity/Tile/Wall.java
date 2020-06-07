@@ -1,13 +1,15 @@
 package Entity.Tile;
 
+import Entity.Player.Player;
+
 public class Wall extends Tile {
-    public Wall(int x,int y){
+    public Wall(){
         super('#');
-        setPos(x,y);
     }
+
     @Override
     public String reciveMove(Unit u) {
-        return u.name+" tried to walk into a wall, nothing happened.";
+        return u.name+" tried to walk into a wall, nothing happened.\n";
     }
     @Override
     public boolean isDead(){

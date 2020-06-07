@@ -1,6 +1,10 @@
 package Entity.Tile;
 
+import Entity.Enemy.Enemy;
+import Entity.Player.Player;
 import Resource_based.Health;
+
+import java.util.List;
 
 public abstract class Unit extends Tile {
     public String name;
@@ -23,6 +27,7 @@ public abstract class Unit extends Tile {
     public String move(TileFrame t){
         return t.reciveMove(this);
     }
+    public abstract String kill(Enemy e);
 
     @Override
     public String reciveMove(Unit u) {
@@ -36,19 +41,17 @@ public abstract class Unit extends Tile {
         else{
             out+=name+" blocked the attack taking no damage.\n";
         }
-        if(hp.getCur()==0) {
-            out+=die(u);
-        }
-        else{
-            out+=name+" has "+hp.getCur()+"/"+hp.getMax()+" health left.\n";
-        }
         return out;
     }
     protected String die(Unit u){
         isDead=true;
-        swapPos(u);
-        return name+" died.";
+        return name+" died.\n";
     }
+
+    public String action(char c){
+        return frame.action(this,c);
+    }
+    public abstract String Tick(Player p);
     public void setHp(int n){
         hp=new Health(n);
     }

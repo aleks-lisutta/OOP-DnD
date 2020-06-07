@@ -1,7 +1,9 @@
 package Entity.Player;
 
+import Entity.Enemy.Enemy;
 import Entity.Heroic;
 import Entity.Tile.Tile;
+import Entity.Tile.TileFrame;
 import Entity.Tile.Unit;
 
 public abstract class Player extends Unit implements Heroic {
@@ -10,7 +12,7 @@ public abstract class Player extends Unit implements Heroic {
     public int nextExp;
 
 
-    public Player(int att, int def,String name, int HP){
+    public Player(int att, int def, String name, int HP){
         super('@',att,def,name,HP);
         lvl=1;
         exp=0;
@@ -20,21 +22,35 @@ public abstract class Player extends Unit implements Heroic {
         exp=exp-(nextExp);
         lvl+=1;
         setUpAbilityLevel();
-        String output=name+" level up to "+lvl+ ", details: \n Attack: "+att+"     Defense: "+def +"exp: "+exp
-                +" exp to next level: "+nextExp+"\n";
+        String output=name+" level up to "+lvl+ ".\n details: \n Attack: "+att+" \n Defense: "+def +"\n exp: "+exp
+                +"\n next level at: "+nextExp+"\n";
         setUpNextLevel();
         return output;
     }
     public String move(Tile t){
-        String output=name+" tried to move to position "+t.pos+".\n";
+        String output=name+" tried to move to position "+t.frame.pos+".\n";
         output+=t.reciveMove(this);
-        output+=checkLevelUp();
         return output;
     }
     protected String die(Unit u){
         chr='X';
         return super.die(u);
     }
+    public boolean isDead(){
+        return false;
+    }
+    @Override
+    public String reciveMove(Unit u) {
+        String out=super.reciveMove(u);
+        if(hp.getCur()<=0) {
+            out+=die(u);
+        }
+        else{
+            out+=name+" has "+hp.getCur()+"/"+hp.getMax()+" health left.\n";
+        }
+        return out;
+    }
+
     private void setUpNextLevel(){
         nextExp=lvl*50;
     }
@@ -45,5 +61,16 @@ public abstract class Player extends Unit implements Heroic {
     }
     public String checkLevelUp(){
         return (exp>=nextExp)? levelUp() : "";
+    }
+
+    public String kill(Enemy e){
+        exp+=e.EXP;
+        String out=name+" gained "+e.EXP+" experience from killing "+e.name+".\n";
+        out+=checkLevelUp();
+        return out;
+    }
+    @Override
+    public String Tick(Player p) {
+        return ""; // this is where you update abilities and stuff
     }
 }

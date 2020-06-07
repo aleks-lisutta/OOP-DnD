@@ -1,5 +1,6 @@
 package GameControl;
 
+import Entity.Enemy.Enemy;
 import Entity.Player.Player;
 import Entity.Tile.Empty;
 import Entity.Tile.Tile;
@@ -23,15 +24,17 @@ import java.util.stream.Stream;
 
 public class Controller {
     public Player player;
-    public Board curBoard;
+    public int curBoard;
     public List<Board> levels;
+    public List<List<Enemy>> enemyList;
 
     public Controller(Player p){
         levels=new LinkedList<>();
         player=p;
+        enemyList=new LinkedList<>();
         loadBoards();
-        curBoard=levels.get(0);
-        player.setPos(curBoard.getPlayerFrame().pos);
+        curBoard=0;
+        player.setFrame(levels.get(0).getPlayerFrame());
     }
 
     public void loadBoards() {
@@ -47,7 +50,7 @@ public class Controller {
         }
         for (String s : result) {
             Board b=new Board();
-            b.Load(LoadBoard(s),player);
+            enemyList.add(b.Load(LoadBoard(s),player));
             levels.add(b);
         }
     }
@@ -78,35 +81,26 @@ public class Controller {
     }
 
     public String display() {
-        return curBoard.display();
+        return levels.get(curBoard).display();
     }
 
-    private boolean isMove(char c){
-        return c=='a'|c=='s'|c=='d'|c=='w';
-    }
     public String action(String actionChar){
         if (actionChar==null|| actionChar.length()!=1){
             throw new IllegalArgumentException("the action is illegal.");
         }
-        List<TileFrame> targets=curBoard.action(player,actionChar.charAt(0));
         StringBuilder log=new StringBuilder();
-        if(isMove(actionChar.charAt(0))) log.append(moveAct(targets.get(0)));
-        else {
-            /////// abilities
-        }
+        log.append(player.action(actionChar.charAt(0)));
         return log.toString();
-    }
-    private String moveAct(TileFrame tr){
-        String out=player.move(tr);
-        if(curBoard.getPlayerFrame().pos.x!=player.pos.x | curBoard.getPlayerFrame().pos.y!=player.pos.y){
-            curBoard.getPlayerFrame().tile=tr.tile;
-            tr.tile=player;
-            curBoard.setPlayerFrame(tr);
-        }
-        return out;
     }
 
     public String enemyTurn() {
-        return "";
+        String out="";
+        for(Enemy t: enemyList.get(curBoard)){
+            if(!t.isDead()) {
+                out+=t.Tick(player);
+            }
+            else enemyList.get(curBoard).remove(t);
+        }
+        return out;
     }
 }

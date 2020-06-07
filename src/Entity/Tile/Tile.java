@@ -1,39 +1,32 @@
 package Entity.Tile;
 
+import Entity.Player.Player;
+import GameControl.Board;
+
 public abstract class Tile {
-    public Pos pos;
+    public TileFrame frame=null;
     public char chr;
 
     public Tile(char c){
-        pos=new Pos(-1,-1);
         chr=c;
     }
-    public Tile(char c,int x,int y){
-        pos=new Pos(x,y);
+    public Tile(char c,TileFrame f){
+        frame=f;
         chr=c;
     }
 
+
     public abstract String reciveMove(Unit u);
-    public Integer getPosX(){
-        return pos.x;
-    }
-    public Integer getPosY(){
-        return pos.y;
-    }
+    public void setFrame(TileFrame f) {frame=f;}
     public String toString(){
         return ""+chr;
     }
     public abstract boolean isDead();
-    public void setPos(int x, int y){
-        pos=new Pos(x,y);
-    }
-
-    public void setPos(Pos p){
-        pos=new Pos(p.x,p.y);
-    }
-    public void swapPos(Tile t){
-        Pos temp=pos;
-        pos=t.pos;
-        t.pos=temp;
+    public void swapFrame(Tile t){
+        TileFrame tmp=frame;
+        frame=t.frame;
+        frame.setTile(this);
+        t.setFrame(tmp);
+        t.frame.setTile(t);
     }
 }
