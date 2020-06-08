@@ -19,6 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.DoubleToIntFunction;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -75,9 +76,20 @@ public class Controller {
     }
 
     public boolean finish(){
-        if (player.isDead)
+        if (player.isDead || enemyList.size()<curBoard )
             return true;
         return false;
+    }
+
+    public String endLevel(){
+        if (enemyList.get(curBoard).size()==0){
+            curBoard++;
+            if (!finish()) {
+                levels.get(curBoard).setPlayerFrame(player);
+            }
+            return "you finished level:"+curBoard;
+        }
+        return "";
     }
 
     public String display() {
@@ -95,11 +107,12 @@ public class Controller {
 
     public String enemyTurn() {
         String out="";
-        for(Enemy t: enemyList.get(curBoard)){
-            if(!t.isDead()) {
-                out+=t.Tick(player);
+        for(int i=0; i<enemyList.get(curBoard).size();i++){
+            Enemy temp=enemyList.get(curBoard).get(i);
+            if(!temp.isDead()) {
+                out+=temp.Tick(player);
             }
-            else enemyList.get(curBoard).remove(t);
+            else {enemyList.get(curBoard).remove(temp);}
         }
         return out;
     }

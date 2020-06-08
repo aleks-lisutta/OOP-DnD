@@ -21,16 +21,14 @@ public abstract class Unit extends Tile {
         setHp(HP);
         this.name=name;
     }
-    public String move(Tile t){
-        return t.reciveMove(this);
-    }
+    public abstract String move(Tile t) ;
     public String move(TileFrame t){
         return t.reciveMove(this);
     }
     public abstract String kill(Enemy e);
 
-    @Override
-    public String reciveMove(Unit u) {
+
+    public String def(Unit u){
         String out=u.name+" attacked "+name+"\n";
         int attRoll=(int)(Math.random()*u.att);
         int defRoll=(int)(Math.random()*def);
@@ -43,11 +41,10 @@ public abstract class Unit extends Tile {
         }
         return out;
     }
-    protected String die(Unit u){
+    public String die(Unit u){
         isDead=true;
         return name+" died.\n";
     }
-
     public String action(char c){
         return frame.action(this,c);
     }
@@ -61,4 +58,5 @@ public abstract class Unit extends Tile {
     }
  //   public String getExp(Unit u){return u.accExp();}//////////////////////////////
  //   public abstract String accExp();/////////////////////////////
+
 }

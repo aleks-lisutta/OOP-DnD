@@ -1,9 +1,7 @@
 package Entity.Enemy;
 
 import Entity.Player.Player;
-import Entity.Tile.Tile;
-import Entity.Tile.TileFrame;
-import Entity.Tile.Unit;
+import Entity.Tile.*;
 
 public abstract class Enemy extends Unit {
     public int EXP;
@@ -14,12 +12,16 @@ public abstract class Enemy extends Unit {
     }
     public void OnEnemyTurn(){}
 
-    public String accExp() {
+
+    public String reciveMove(Enemy p) {
         return "";
     }
+    public String move(Tile t){
+        return t.reciveMove(this);
+    }
 
-    public String reciveMove(Unit p) {
-        String out=super.reciveMove(p);
+    public String reciveMove(Player p){
+        String out=def(p);
         if(hp.getCur()<=0) {
             out+=die(p);
             out+=p.kill(this);
@@ -29,8 +31,10 @@ public abstract class Enemy extends Unit {
         }
         return out;
     }
+
     public String kill(Enemy e){
         return name+" accidentally killed "+e.name;
     }
+
 
 }

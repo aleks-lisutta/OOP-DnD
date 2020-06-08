@@ -31,6 +31,7 @@ public class Service {
             }
             output+="\n";
             output+=con.enemyTurn();
+            output+=con.endLevel();
             System.out.println(output);/////////////////////////////////////
         }
         System.out.println(con.display());

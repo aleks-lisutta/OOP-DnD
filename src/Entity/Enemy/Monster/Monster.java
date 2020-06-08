@@ -31,7 +31,7 @@ public abstract class Monster extends Enemy {
         String out="";
         double x=frame.pos.x-p.frame.pos.x;
         double y=frame.pos.y-p.frame.pos.y;
-        if(x<y){
+        if(Math.abs(x)<Math.abs(y)){
             if(y>0) out+=super.action('a');
             else out+=super.action('d');
         }

@@ -5,8 +5,10 @@ public class Health extends Resource {
         super(max);
         this.cur=max;
     }
-    public void levelUpHP(int pool){
-        max=pool*10;
+
+
+    public void levelUpHP(int level){
+        max=max+level*10;
         cur=max;
     }
 }

@@ -1,5 +1,6 @@
 package Entity.Tile;
 
+import Entity.Enemy.Enemy;
 import Entity.Player.Player;
 
 public class Wall extends Tile {
@@ -8,11 +9,13 @@ public class Wall extends Tile {
     }
 
     @Override
-    public String reciveMove(Unit u) {
-        return u.name+" tried to walk into a wall, nothing happened.\n";
-    }
-    @Override
     public boolean isDead(){
         return false;
+    }
+    public String reciveMove(Enemy e){
+        return "";
+    }
+    public String reciveMove(Player p){
+        return p.name+" tried to walk into a wall, nothing happened.\n";
     }
 }

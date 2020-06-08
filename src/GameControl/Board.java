@@ -75,7 +75,7 @@ public class Board {
         return playerFrame;
     }
 
-    public void setPlayerFrame(TileFrame playerFrame) {
-        this.playerFrame = playerFrame;
+    public void setPlayerFrame(Player p) {
+        playerFrame.tile = p;
     }
 }

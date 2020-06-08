@@ -1,5 +1,6 @@
 package Entity.Tile;
 
+import Entity.Enemy.Enemy;
 import Entity.Player.Player;
 import GameControl.Board;
 
@@ -14,9 +15,8 @@ public abstract class Tile {
         frame=f;
         chr=c;
     }
-
-
-    public abstract String reciveMove(Unit u);
+    public abstract String reciveMove(Enemy u);
+    public abstract String reciveMove(Player u);
     public void setFrame(TileFrame f) {frame=f;}
     public String toString(){
         return ""+chr;
@@ -29,4 +29,5 @@ public abstract class Tile {
         t.setFrame(tmp);
         t.frame.setTile(t);
     }
+
 }

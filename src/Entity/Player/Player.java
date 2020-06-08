@@ -2,9 +2,7 @@ package Entity.Player;
 
 import Entity.Enemy.Enemy;
 import Entity.Heroic;
-import Entity.Tile.Tile;
-import Entity.Tile.TileFrame;
-import Entity.Tile.Unit;
+import Entity.Tile.*;
 
 public abstract class Player extends Unit implements Heroic {
     public int exp;
@@ -32,7 +30,8 @@ public abstract class Player extends Unit implements Heroic {
         output+=t.reciveMove(this);
         return output;
     }
-    protected String die(Unit u){
+
+    public String die(Unit u){
         chr='X';
         return super.die(u);
     }
@@ -40,15 +39,19 @@ public abstract class Player extends Unit implements Heroic {
         return false;
     }
     @Override
-    public String reciveMove(Unit u) {
-        String out=super.reciveMove(u);
+    public String reciveMove(Enemy e) {
+        String out=def(e);
         if(hp.getCur()<=0) {
-            out+=die(u);
+            out+=die(e);
+
         }
         else{
             out+=name+" has "+hp.getCur()+"/"+hp.getMax()+" health left.\n";
         }
         return out;
+    }
+    public String reciveMove(Player p){
+        throw new IllegalArgumentException("the Function acceptUnit is not good");
     }
 
     private void setUpNextLevel(){
@@ -57,7 +60,7 @@ public abstract class Player extends Unit implements Heroic {
     public void setUpAbilityLevel() {
         att = 4 * lvl + att;
         def = lvl + def;
-        hp.levelUpHP(hp.getMax());
+        hp.levelUpHP(lvl);
     }
     public String checkLevelUp(){
         return (exp>=nextExp)? levelUp() : "";
