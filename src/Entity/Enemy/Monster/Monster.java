@@ -42,7 +42,7 @@ public abstract class Monster extends Enemy {
         return out;
     }
     @Override
-    public String Tick(Player p) {
+    public String Turn(Player p) {
         String out="";
         if(Utils.RANGE(p.frame,this.frame)<vision_range){
             out+=hunt(p);

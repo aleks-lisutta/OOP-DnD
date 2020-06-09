@@ -110,7 +110,7 @@ public class Controller {
         for(int i=0; i<enemyList.get(curBoard).size();i++){
             Enemy temp=enemyList.get(curBoard).get(i);
             if(!temp.isDead()) {
-                out+=temp.Tick(player);
+                out+=temp.Turn(player);
             }
             else {enemyList.get(curBoard).remove(temp);}
         }

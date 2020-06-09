@@ -1,4 +1,4 @@
-package Resource_based;
+package Resource_based.Resources;
 
 public abstract class Resource {
     int max;

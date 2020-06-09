@@ -3,6 +3,9 @@ package Entity.Player;
 import Entity.Enemy.Enemy;
 import Entity.Heroic;
 import Entity.Tile.*;
+import Resource_based.Resources.Resource;
+
+import java.util.List;
 
 public abstract class Player extends Unit implements Heroic {
     public int exp;
@@ -72,8 +75,5 @@ public abstract class Player extends Unit implements Heroic {
         out+=checkLevelUp();
         return out;
     }
-    @Override
-    public String Tick(Player p) {
-        return ""; // this is where you update abilities and stuff
-    }
+
 }

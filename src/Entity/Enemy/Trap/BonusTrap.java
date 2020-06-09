@@ -10,7 +10,7 @@ public class BonusTrap extends Trap {
         setUpVisibility(1,5);
     }
     @Override
-    public String Tick(Player p){
+    public String Turn(Player p){
         return setStatus();
     }
 }

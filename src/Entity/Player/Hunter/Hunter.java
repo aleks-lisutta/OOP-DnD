@@ -14,4 +14,9 @@ public abstract class Hunter extends Player {
     public String cast(List<Unit> ls) {
         return null;
     }
+
+    @Override
+    public String Tick() {
+        return null;
+    }
 }

@@ -2,9 +2,7 @@ package Entity.Tile;
 
 import Entity.Enemy.Enemy;
 import Entity.Player.Player;
-import Resource_based.Health;
-
-import java.util.List;
+import Resource_based.Resources.Health;
 
 public abstract class Unit extends Tile {
     public String name;
@@ -27,7 +25,6 @@ public abstract class Unit extends Tile {
     }
     public abstract String kill(Enemy e);
 
-
     public String def(Unit u){
         String out=u.name+" attacked "+name+"\n";
         int attRoll=(int)(Math.random()*u.att);
@@ -46,9 +43,10 @@ public abstract class Unit extends Tile {
         return name+" died.\n";
     }
     public String action(char c){
-        return frame.action(this,c);
+        String out=frame.action(this,c);
+        Tick();
+        return out;
     }
-    public abstract String Tick(Player p);
     public void setHp(int n){
         hp=new Health(n);
     }
@@ -56,7 +54,6 @@ public abstract class Unit extends Tile {
     public boolean isDead(){
         return isDead;
     }
- //   public String getExp(Unit u){return u.accExp();}//////////////////////////////
- //   public abstract String accExp();/////////////////////////////
+    public abstract String Tick(); //implement in each player differently
 
 }

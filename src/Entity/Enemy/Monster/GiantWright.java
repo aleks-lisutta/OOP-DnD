@@ -1,8 +1,5 @@
 package Entity.Enemy.Monster;
 
-import Entity.Tile.TileFrame;
-import Resource_based.Health;
-
 public class GiantWright extends Monster {
 
     public GiantWright() {

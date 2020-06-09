@@ -1,8 +1,5 @@
 package Entity.Enemy.Monster;
 
-import Entity.Tile.TileFrame;
-import Resource_based.Health;
-
 public class BearWrigh extends Monster{
 
     public BearWrigh() {

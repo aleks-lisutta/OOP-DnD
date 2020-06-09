@@ -10,14 +10,15 @@ public abstract class Enemy extends Unit {
         super(c,att,def,name,HP);
         this.EXP=EXP;
     }
-    public void OnEnemyTurn(){}
+    public abstract String Turn(Player p);
 
 
     public String reciveMove(Enemy p) {
         return "";
     }
     public String move(Tile t){
-        return t.reciveMove(this);
+        String out=t.reciveMove(this);
+        return out;
     }
 
     public String reciveMove(Player p){
@@ -36,5 +37,7 @@ public abstract class Enemy extends Unit {
         return name+" accidentally killed "+e.name;
     }
 
-
+    public String Tick(){
+        return ""; //override this in boss, dont override in monster or trap
+    }
 }

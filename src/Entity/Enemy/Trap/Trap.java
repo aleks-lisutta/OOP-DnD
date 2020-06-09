@@ -42,7 +42,7 @@ public abstract class Trap extends Enemy {
     }
 
     @Override
-    public String Tick(Player p) {
+    public String Turn(Player p) {
         if (Utils.RANGE(frame,p.frame)<3) {
             visible = true;
             tickCounter = 0;
