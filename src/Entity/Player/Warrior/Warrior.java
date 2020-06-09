@@ -1,6 +1,7 @@
 package Entity.Player.Warrior;
 
 import Entity.Player.Player;
+import Entity.Tile.Tile;
 import Entity.Tile.Unit;
 
 
@@ -13,7 +14,7 @@ public abstract class Warrior extends Player {
     }
 
     @Override
-    public String cast(List<Unit> ls) {
+    public String cast(List<Tile> ls) {
         return null;
     }
 

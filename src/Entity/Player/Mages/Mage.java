@@ -1,6 +1,7 @@
 package Entity.Player.Mages;
 
 import Entity.Player.Player;
+import Entity.Tile.Tile;
 import Entity.Tile.Unit;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public abstract class Mage extends Player {
     }
 
     @Override
-    public String cast(List<Unit> ls) {
+    public String cast(List<Tile> ls) {
         return null;
     }
     @Override

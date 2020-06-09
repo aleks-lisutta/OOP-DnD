@@ -76,4 +76,18 @@ public abstract class Player extends Unit implements Heroic {
         return out;
     }
 
+    private boolean isMove(char c){
+        return c=='a'|c=='s'|c=='d'|c=='w';
+    }
+
+    @Override
+    public String action(char c){
+        if(isMove(c)) return  super.action(c);
+        else{
+            String out=frame.cast(this,c);
+            Tick();
+            return out;
+        }
+    }
+
 }

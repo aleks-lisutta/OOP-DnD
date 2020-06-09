@@ -43,7 +43,7 @@ public abstract class Unit extends Tile {
         return name+" died.\n";
     }
     public String action(char c){
-        String out=frame.action(this,c);
+        String out=frame.move(this,c);
         Tick();
         return out;
     }

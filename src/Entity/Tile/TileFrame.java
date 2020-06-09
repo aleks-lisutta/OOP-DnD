@@ -1,7 +1,9 @@
 package Entity.Tile;
 
+import Entity.Heroic;
 import GameControl.Board;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class TileFrame {
@@ -23,19 +25,27 @@ public class TileFrame {
 
         return out;
     }
-    private boolean isMove(char c){
-        return c=='a'|c=='s'|c=='d'|c=='w';
-    }
-    public String action(Unit u,char c){
+    public String move(Unit u,char c){
         List<TileFrame> targets=board.action(this,c);
         String out="";
-        if(isMove(c)) {
-            for (TileFrame tf : targets) {
-                out+=u.move(tf);
-            }
+        for (TileFrame tf : targets) {
+            out+=u.move(tf);
         }
         return out;
     }
+
+    public String cast(Heroic h,char c){
+        List<TileFrame> TF =board.action(this,c);
+        List<Tile> targets=new LinkedList<>();
+        String out="";
+        for(TileFrame tf: TF){
+            targets.add(tf.tile);
+        }
+        out+=h.cast(targets);
+
+        return out;
+    }
+
     public Board getBoard(){return board;}
 
     public Tile getTile(){return tile;}

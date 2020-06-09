@@ -41,7 +41,7 @@ public abstract class Monster extends Enemy {
         }
         return out;
     }
-    @Override
+    @Override // override again in boss
     public String Turn(Player p) {
         String out="";
         if(Utils.RANGE(p.frame,this.frame)<vision_range){
