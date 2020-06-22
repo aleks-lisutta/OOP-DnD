@@ -11,4 +11,10 @@ public class Health extends Resource {
         max=max+level*10;
         cur=max;
     }
+    public void SetPool(int a){
+        if (a<1)
+            max=a;
+        else
+            throw new IllegalArgumentException("you try to add illegal hp");
+    }
 }

@@ -101,7 +101,7 @@ public class Controller {
             throw new IllegalArgumentException("the action is illegal.");
         }
         StringBuilder log=new StringBuilder();
-        log.append(player.action(actionChar.charAt(0)));
+        log.append(player.action(actionChar.charAt(0),enemyList.get(curBoard)));
         return log.toString();
     }
 

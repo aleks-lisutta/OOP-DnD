@@ -1,8 +1,13 @@
 package Entity.Tile;
 
 import Entity.Enemy.Enemy;
+import Entity.Heroic;
 import Entity.Player.Player;
+import Resource_based.Abilities.Ability;
+import Resource_based.Abilities.AvengersShield;
 import Resource_based.Resources.Health;
+
+import java.util.List;
 
 public abstract class Unit extends Tile {
     public String name;
@@ -44,7 +49,7 @@ public abstract class Unit extends Tile {
     }
     public String action(char c){
         String out=frame.move(this,c);
-        Tick();
+        out+=Tick();
         return out;
     }
     public void setHp(int n){
@@ -54,6 +59,11 @@ public abstract class Unit extends Tile {
     public boolean isDead(){
         return isDead;
     }
+    public abstract String receiveCast(Ability a);
+
     public abstract String Tick(); //implement in each player differently
+
+
+
 
 }

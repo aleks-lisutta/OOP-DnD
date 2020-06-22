@@ -6,6 +6,7 @@ import Entity.Tile.Unit;
 import java.util.List;
 
 public interface Heroic {
-    public String cast(List<Tile> ls);
+    public String cast(List<Unit> ls);
+
 
 }

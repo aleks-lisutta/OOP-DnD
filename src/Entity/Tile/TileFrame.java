@@ -22,9 +22,10 @@ public class TileFrame {
             tile.setFrame(this);
             tile.swapFrame(u);
         }
-
         return out;
     }
+
+
     public String move(Unit u,char c){
         List<TileFrame> targets=board.action(this,c);
         String out="";
@@ -34,21 +35,11 @@ public class TileFrame {
         return out;
     }
 
-    public String cast(Heroic h,char c){
-        List<TileFrame> TF =board.action(this,c);
-        List<Tile> targets=new LinkedList<>();
-        String out="";
-        for(TileFrame tf: TF){
-            targets.add(tf.tile);
-        }
-        out+=h.cast(targets);
-
-        return out;
-    }
 
     public Board getBoard(){return board;}
 
     public Tile getTile(){return tile;}
+
     public void setTile(Tile t){
         tile=t;
     }

@@ -7,6 +7,7 @@ import Entity.Tile.Tile;
 import Entity.Tile.TileFrame;
 import Entity.Tile.Unit;
 import GameControl.Utils;
+import Resource_based.Abilities.Ability;
 
 import java.beans.Visibility;
 import java.util.DoubleSummaryStatistics;
@@ -66,5 +67,10 @@ public abstract class Trap extends Enemy {
         }
         tickCounter+=1;
         return "";
+    }
+    public String receiveCast(Ability a){
+        if (visible)
+            return super.receiveCast(a);
+        return null;
     }
 }

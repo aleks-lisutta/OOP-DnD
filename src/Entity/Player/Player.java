@@ -3,22 +3,28 @@ package Entity.Player;
 import Entity.Enemy.Enemy;
 import Entity.Heroic;
 import Entity.Tile.*;
+import GameControl.Utils;
+import Resource_based.Abilities.Ability;
 import Resource_based.Resources.Resource;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Player extends Unit implements Heroic {
     public int exp;
     public int lvl;
     public int nextExp;
+    protected int range;
 
 
-    public Player(int att, int def, String name, int HP){
+    public Player(int att, int def, String name, int HP,int range){
         super('@',att,def,name,HP);
         lvl=1;
         exp=0;
         nextExp=100;
+        this.range=range;
     }
+
     public String levelUp(){
         exp=exp-(nextExp);
         lvl+=1;
@@ -64,7 +70,9 @@ public abstract class Player extends Unit implements Heroic {
         att = 4 * lvl + att;
         def = lvl + def;
         hp.levelUpHP(lvl);
+        levelUpSpacialAbility();
     }
+    public abstract void levelUpSpacialAbility();
     public String checkLevelUp(){
         return (exp>=nextExp)? levelUp() : "";
     }
@@ -77,17 +85,25 @@ public abstract class Player extends Unit implements Heroic {
     }
 
     private boolean isMove(char c){
-        return c=='a'|c=='s'|c=='d'|c=='w';
+        return c=='a'|c=='s'|c=='d'|c=='q'|c=='w';
     }
 
-    @Override
-    public String action(char c){
+
+    public String action(char c, List<Enemy> L){
         if(isMove(c)) return  super.action(c);
         else{
-            String out=frame.cast(this,c);
-            Tick();
+            List<Unit> inRange=new LinkedList<>();
+            for (Enemy e : L){
+                if (Utils.RANGE(this.frame, e.frame)<=range)
+                    inRange.add(e);
+            }
+            String out=cast(inRange);
+            out+=Tick();
             return out;
         }
+    }
+    public String receiveCast(Ability a){
+        return "";
     }
 
 }

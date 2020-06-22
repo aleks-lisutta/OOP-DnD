@@ -2,6 +2,7 @@ package Entity.Enemy;
 
 import Entity.Player.Player;
 import Entity.Tile.*;
+import Resource_based.Abilities.Ability;
 
 public abstract class Enemy extends Unit {
     public int EXP;
@@ -32,9 +33,36 @@ public abstract class Enemy extends Unit {
         }
         return out;
     }
+    public void abilityKill(){//we need to check that the controller remove the enemy from list.
+        Tile t=new Empty();
+        frame.setTile(t);
+        t.setFrame(frame);
+    }
+
+    public String injured(int cost,Player p){
+        hp.setCur(hp.getCur()-cost);
+        StringBuilder output=new StringBuilder();
+        output.append(p.name).append(" hit with his ability ").append(name).append(" dealing ").append(cost).append(" damage.\n");
+
+        if (hp.getCur()==0){
+            isDead=true;
+            output.append(p.name).append(" kill ").append(name).append("\n");
+            output.append(p.kill(this));
+            abilityKill();
+            return output.toString();
+        }
+        output.append( name).append(" has ").append(hp.getCur()).append("/").append(hp.getMax()).append(" hp left.\n");
+        return output.toString();
+    }
+
+    public  String receiveCast(Ability a){
+        return a.attack(this);
+    }
+
+
 
     public String kill(Enemy e){
-        return name+" accidentally killed "+e.name;
+        return name+" accidentally killed "+e.name+".\n";
     }
 
     public String Tick(){
