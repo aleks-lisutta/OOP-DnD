@@ -9,52 +9,56 @@ import Resource_based.Resources.Mana;
 import java.util.List;
 import java.util.Random;
 
-public class Blizzard extends Ability {
-    public Mage mage;
+public class Blizzard extends PlayerAbility {
     public Mana mana;
     int cost;
     int hitsCount;
     int spellPower;
-    public Blizzard(Mage m,int M,int cost,int hit,int sp){
-        mage=m;
+    int lvl;
+    public Blizzard(int M,int cost,int hit,int sp){
         mana=new Mana(M,cost);
         this.cost=cost;
         hitsCount=hit;
         spellPower=sp;
+        lvl=1;
     }
 
     @Override
     public String useAbility(List<Unit> ls) {
         if (!canUse())
-            return mage.name+" can attack with ability more then "+" turns.\n";
+            return p.name+" can attack with ability more then "+" turns.\n";
         mana.use();
         if (ls.size()>0){
             int hits=0;
             StringBuilder output=new StringBuilder();
-            output.append(mage.name).append(" used with ability attack\n");
+            output.append(p.name).append(" used with ability attack\n");
             while (ls.size()>0 & hits<hitsCount)
             {
                 Unit u=ls.get(selectNumber(ls.size()));
-                output.append(u.receiveCast(this));
-                if (u.isDead())
+                String check=u.receiveCast(this);
+                if (check==null)
+                {
                     ls.remove(u);
-                hits+=1;
+                }
+                else {
+                    output.append(check);
+                    if (u.isDead())
+                        ls.remove(u);
+                    hits += 1;
+                }
             }
             return output.toString();
         }
-        return mage.name+" used with ability but dont have enemies in his range.\n";
+        return p.name+" used with ability but dont have enemies in his range.\n";
     }
 
     public String attack(Enemy e) {
         int defRoll = (int) (Math.random() * e.def);
         if (spellPower > defRoll) {
-            String output=(e.injured(spellPower,mage));
+            String output=(e.injured(spellPower,p));
             return output;
         }
         return e.name+" success to def the attack.\n";
-    }
-    public String attack(Player p){//boss
-        return "system bug, you cant attack player.";
     }
 
     private int selectNumber(int a){
@@ -70,11 +74,12 @@ public class Blizzard extends Ability {
     @Override
     public void LevelUp() {
         mana.LevelUp();
-        spellPower=spellPower+10*mage.lvl;
+        lvl+=1;
+        spellPower=spellPower+10*lvl;
     }
 
     @Override
     public String Tick() {
-        return mana.Tick(mage.name);
+        return mana.Tick(p.name);
     }
 }

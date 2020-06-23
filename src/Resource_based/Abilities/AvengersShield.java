@@ -7,38 +7,39 @@ import Resource_based.Resources.Cooldown;
 import java.util.List;
 import java.util.Random;
 
-public class AvengersShield extends Ability {
-    Warrior war;
+public class AvengersShield extends PlayerAbility {
     Cooldown cool;
 
-    public AvengersShield(int a, Warrior p) {
+    public AvengersShield(int a) {
         cool=new Cooldown(a);
-        war=p;
     }
 
     @Override
-    public String useAbility(List<Unit> ls) {
+    public String useAbility(List<Unit> ls ) {
         if (!canUse())
-            return war.name+" can attack with ability more then "+cool.getCur()+" turns.\n";
-        cool.setCur(cool.getMax());
+            return p.name+" can attack with ability more then "+cool.getCur()+" turns.\n";
         if (ls.size()>0){
             Unit u=ls.get(selectNumber(ls.size()));
-            return u.receiveCast(this);
+            String output=u.receiveCast(this);
+            if (output==null){
+                ls.remove(u);
+                return useAbility(ls);
+            }
+            cool.setCur(cool.getMax());
+            return output;
         }
-        return war.name+" used ability but no have enemies in " +war.name+ "'s range.\n";
+        cool.setCur(cool.getMax());
+        return p.name+" used ability but no have enemies in " +p.name+ "'s range.\n";
     }
 
     public String attack(Enemy e){
         int defRoll = (int) (Math.random() * e.def);
-        int attWar=(int)(0.1*war.hp.getMax());
+        int attWar=(int)(0.1*p.hp.getMax());
         if (attWar>defRoll)
         {
-            return (e.injured(attWar,war));
+            return (e.injured(attWar,p));
         }
         return e.name+" success to def the attack.\n";
-    }
-    public String attack(Player p){//boss
-        return "system but, you can not attack player";
     }
 
     private int selectNumber(int a){
@@ -58,7 +59,7 @@ public class AvengersShield extends Ability {
 
     @Override
     public String Tick() {
-         return cool.Tick(war.name);
+         return cool.Tick(p.name);
     }
 
 

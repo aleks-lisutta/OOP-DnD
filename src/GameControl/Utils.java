@@ -1,4 +1,7 @@
 package GameControl;
+import Entity.Enemy.Bosses.NightsKing;
+import Entity.Enemy.Bosses.QueenCersei;
+import Entity.Enemy.Bosses.TheMountain;
 import Entity.Enemy.Enemy;
 import Entity.Enemy.Monster.*;
 import Entity.Enemy.Trap.BonusTrap;
@@ -15,11 +18,10 @@ public class Utils {
     }
     public static Tuple getTile(char c){
         switch (c){
-            case '.':
-            case 'C':
-            case 'K':
-            case 'M':
-                return new Tuple(new Empty(),null);
+            case '.': return new Tuple(new Empty(),null);
+            case 'C': return new Tuple(new QueenCersei(),new QueenCersei());
+            case 'K': return new Tuple(new NightsKing(),new NightsKing());
+            case 'M': return new Tuple(new TheMountain(),new TheMountain());
             case  '#': return new Tuple(new Wall(),null);
             case 's': return new Tuple(new Lannister_Solider(),new Lannister_Solider());
             case 'k': return new Tuple(new Lannister_Knight(),new Lannister_Knight());
@@ -35,5 +37,30 @@ public class Utils {
             default:throw new IllegalArgumentException(c+" char is illegal");
         }
     }
+
+   /*
+    public static Tuple getTile(char c){
+        switch (c){
+            case 'C':
+            case 'M':
+            case 's':
+            case 'k':
+            case 'q':
+            case 'z':
+            case 'b':
+            case 'g':
+            case 'w':
+            case 'B':
+            case 'Q':
+            case 'D':
+            case '.': return new Tuple(new Empty(),null);
+            case '@': return new Tuple(null,null);
+            case  '#': return new Tuple(new Wall(),null);
+            case 'K': return new Tuple(new NightsKing(),new NightsKing());
+            default:throw new IllegalArgumentException(c+" char is illegal");
+        }
+    }
+
+    */
 
 }

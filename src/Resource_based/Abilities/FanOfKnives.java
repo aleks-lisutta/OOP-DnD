@@ -8,12 +8,10 @@ import Resource_based.Resources.Energy;
 
 import java.util.List;
 
-public class FanOfKnives extends Ability {
-    Rogue rog;
+public class FanOfKnives extends PlayerAbility {
     Energy energy;
     int cost;
-    public FanOfKnives(int cost,Rogue r){
-        rog=r;
+    public FanOfKnives(int cost){
         energy=new Energy(100,cost);
         energy.setCur(energy.getMax());
         this.cost=cost;
@@ -21,27 +19,25 @@ public class FanOfKnives extends Ability {
     @Override
     public String useAbility(List<Unit> ls) {
         if (!canUse())
-            return rog.name+" can not use with ability, "+rog.name+" need more energy.\n";
+            return p.name+" can not use with ability, "+p.name+" need more energy.\n";
         energy.setCur(energy.getCur()-cost);
         if (ls.size()==0)
-            return rog.name+" used with ability but enemies no exist in your range.\n";
+            return p.name+" used with ability but enemies no exist in your range.\n";
         StringBuilder output=new StringBuilder();
         for(Unit u: ls){
-            output.append(u.receiveCast(this));
+            String check=u.receiveCast(this);
+            if (check!=null)
+                 output.append(check);
             }
         return output.toString();
     }
     public String attack(Enemy e) {
         int defRoll = (int) (Math.random() * e.def);
-        if (rog.att > defRoll) {
-            return e.injured(rog.att - defRoll, rog);
+        if (p.att > defRoll) {
+            return e.injured(p.att - defRoll, p);
         }
         return e.name+" success to def the attack.\n";
     }
-    public String attack(Player p){
-        return "system but, you can not attack player";
-    }
-
 
     @Override
     protected boolean canUse() {
@@ -55,6 +51,8 @@ public class FanOfKnives extends Ability {
 
     @Override
     public String Tick() {
-       return energy.Tick(rog.name);
+       return energy.Tick(p.name);
     }
+
+
 }

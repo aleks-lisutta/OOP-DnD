@@ -3,14 +3,8 @@ package Entity.Enemy.Trap;
 import Entity.Enemy.Enemy;
 import Entity.Player.Player;
 import Entity.Tile.Empty;
-import Entity.Tile.Tile;
-import Entity.Tile.TileFrame;
-import Entity.Tile.Unit;
 import GameControl.Utils;
-import Resource_based.Abilities.Ability;
-
-import java.beans.Visibility;
-import java.util.DoubleSummaryStatistics;
+import Resource_based.Abilities.PlayerAbility;
 
 public abstract class Trap extends Enemy {
     public int tickCounter;
@@ -68,7 +62,7 @@ public abstract class Trap extends Enemy {
         tickCounter+=1;
         return "";
     }
-    public String receiveCast(Ability a){
+    public String receiveCast(PlayerAbility a){
         if (visible)
             return super.receiveCast(a);
         return null;

@@ -12,21 +12,19 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.DoubleToIntFunction;
 
-public class Shoot extends Ability {
+public class Shoot extends PlayerAbility {
     Arrows arr;
-    Hunter hun;
-    public Shoot(Hunter h){
-        hun=h;
-        arr=new Arrows(10*hun.lvl);
+    public Shoot(){
+        arr=new Arrows(10);
         arr.setCur(arr.getMax());
     }
     @Override
     public String useAbility(List<Unit> ls) {
         if (!canUse())
-            return hun.name+" does not have a arrows.\n";
+            return p.name+" does not have a arrows.\n";
         if (ls.size()==0)
             return "does not exist enemies in his range.\n";
-        Unit u=selectClosest(ls);
+        Unit u=selectClosest(ls,p);
 
         String output=u.receiveCast(this);
         if (output==null){
@@ -38,21 +36,18 @@ public class Shoot extends Ability {
     }
     public String attack(Enemy e){
         int defRoll = (int) (Math.random() * e.def);
-        if (hun.att>defRoll){
-            return e.injured(hun.att-defRoll, hun);
+        if (p.att>defRoll){
+            return e.injured(p.att-defRoll, p);
         }
         return e.name+" success to def the attack.\n";
     }
-    public String attack(Player p){
-        return "system but, you can not attack player";
-    }
-    private Unit selectClosest(List<Unit> units){
+    private Unit selectClosest(List<Unit> units,Player p){
         Unit output=units.get(0);
-        double MinRange=Utils.RANGE(output.frame,hun.frame);
+        double MinRange=Utils.RANGE(output.frame,p.frame);
         if (MinRange==1)
             return output;
         for (Unit u: units){
-            double range=Utils.RANGE(u.frame,hun.frame);
+            double range=Utils.RANGE(u.frame,p.frame);
             if (range==1)
                 return u;
             if (range<MinRange)
@@ -76,6 +71,6 @@ public class Shoot extends Ability {
 
     @Override
     public String Tick() {
-        return arr.Tick(hun.name);
+        return arr.Tick(p.name);
     }
 }

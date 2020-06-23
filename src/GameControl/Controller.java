@@ -35,7 +35,7 @@ public class Controller {
         enemyList=new LinkedList<>();
         loadBoards();
         curBoard=0;
-        player.setFrame(levels.get(0).getPlayerFrame());
+        player.setFrame(levels.get(curBoard).getPlayerFrame());
     }
 
     public void loadBoards() {
@@ -86,6 +86,7 @@ public class Controller {
             curBoard++;
             if (!finish()) {
                 levels.get(curBoard).setPlayerFrame(player);
+                player.setFrame(levels.get(curBoard).getPlayerFrame());
             }
             return "you finished level:"+curBoard;
         }

@@ -2,7 +2,8 @@ package Entity.Enemy;
 
 import Entity.Player.Player;
 import Entity.Tile.*;
-import Resource_based.Abilities.Ability;
+import Resource_based.Abilities.BossAbility;
+import Resource_based.Abilities.PlayerAbility;
 
 public abstract class Enemy extends Unit {
     public int EXP;
@@ -39,7 +40,7 @@ public abstract class Enemy extends Unit {
         t.setFrame(frame);
     }
 
-    public String injured(int cost,Player p){
+    public String injured(int cost, Player p){
         hp.setCur(hp.getCur()-cost);
         StringBuilder output=new StringBuilder();
         output.append(p.name).append(" hit with his ability ").append(name).append(" dealing ").append(cost).append(" damage.\n");
@@ -55,8 +56,13 @@ public abstract class Enemy extends Unit {
         return output.toString();
     }
 
-    public  String receiveCast(Ability a){
+
+
+    public  String receiveCast(PlayerAbility a){
         return a.attack(this);
+    }
+    public  String receiveCast(BossAbility a){
+        return "Boss decided to attack enemy";
     }
 
 

@@ -9,10 +9,10 @@ public class Energy extends Resource {
     }
 
     public String Tick(String name){
-        if (cur>=cost-10)
-            return name+" can use with ability next turn.";
         setCur(cur+10);
-        return name+ " current energy: "+cur+",  cost ability: "+cost;
+        if (cur>=cost)
+            return name + " can use with ability.";
+        return name+ " current energy: "+(cur-10)+",  cost ability: "+cost;
     }
 
 }
