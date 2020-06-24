@@ -16,8 +16,17 @@ public class Service {
         startGame();
     }
     public void choosePlayer(){
-        System.out.println(menu.options());
-        con=new Controller(menu.getPlayer(scan.nextLine()));
+        boolean chosen=false;
+        while(!chosen) {
+            System.out.println(menu.options());
+            try {
+                con = new Controller(menu.getPlayer(scan.nextLine()));
+                chosen=true;
+            }
+            catch(Exception e){
+                System.out.println("invalid player name, please try again.\n");
+            }
+        }
     }
     
     public void startGame(){
@@ -27,14 +36,16 @@ public class Service {
             try {
                 output=con.action(scan.nextLine());
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.print("invalid move entered, please try again.\n");
             }
             output+="\n";
             output+=con.enemyTurn();
+            output+=con.stats();
             output+=con.endLevel();
-            System.out.println(output);/////////////////////////////////////
+
+            System.out.println(output);
+            output="";
         }
-        System.out.println(con.display());
-        System.out.println("you died!");
+
     }
 }

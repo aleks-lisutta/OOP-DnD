@@ -82,4 +82,9 @@ public class Blizzard extends PlayerAbility {
     public String Tick() {
         return mana.Tick(p.name);
     }
+
+    @Override
+    public String toString(){
+        return  "Mana: "+mana.getCur()+"/"+mana.getMax()+"."+(canUse()? " Blizzard available" : "");
+    }
 }

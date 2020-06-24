@@ -4,9 +4,9 @@ import Entity.Enemy.Enemy;
 import Entity.Player.Player;
 
 public class Empty extends Tile {
-    public static char CHR='.';
+    public static final char CHR='.';
     public Empty(){
-        super('.');
+        super(CHR);
 
     }
 
@@ -14,9 +14,6 @@ public class Empty extends Tile {
     public String reciveMove(Enemy e) {
         swapFrame(e);
         return "";
-
-      //  swapFrame(u);
-      //  return u.name+" walked to position "+u.frame.pos+"\n";
     }
     public String reciveMove(Player p) {
         swapFrame(p);

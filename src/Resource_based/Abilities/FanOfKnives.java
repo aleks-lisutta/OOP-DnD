@@ -54,5 +54,8 @@ public class FanOfKnives extends PlayerAbility {
        return energy.Tick(p.name);
     }
 
-
+    @Override
+    public String toString(){
+        return  "Energy: "+energy.getCur()+"/"+energy.getMax()+"."+(canUse()? " Fan of Knives available" : "");
+    }
 }

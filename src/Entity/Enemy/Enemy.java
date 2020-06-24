@@ -43,11 +43,11 @@ public abstract class Enemy extends Unit {
     public String injured(int cost, Player p){
         hp.setCur(hp.getCur()-cost);
         StringBuilder output=new StringBuilder();
-        output.append(p.name).append(" hit with his ability ").append(name).append(" dealing ").append(cost).append(" damage.\n");
+        output.append(p.name).append(" hit ").append(name).append(" with his ability, dealing ").append(cost).append(" damage.\n");
 
         if (hp.getCur()==0){
             isDead=true;
-            output.append(p.name).append(" kill ").append(name).append("\n");
+            output.append(p.name).append(" killed ").append(name).append("\n");
             output.append(p.kill(this));
             abilityKill();
             return output.toString();

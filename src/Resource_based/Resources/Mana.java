@@ -12,9 +12,7 @@ public class Mana extends Resource {
 
     public String Tick(String name){
         setCur(cur+lvl);
-        if (cur>=cost)
-            return name+" can use with ability next turn.";
-        return "current mana:" +cur+ ", cost of mana: "+cost;
+        return "";
     }
     public void LevelUp(){
         max+=(25*lvl);

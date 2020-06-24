@@ -4,14 +4,14 @@ import Entity.Enemy.Enemy;
 import Entity.Player.Player;
 import Entity.Tile.Tile;
 import Entity.Tile.TileFrame;
+import GameControl.Controller;
 import GameControl.Utils;
 
 import java.util.List;
 import java.util.Random;
 
-public abstract class Monster extends Enemy {
+public class Monster extends Enemy {
     public int vision_range;
-    public boolean lock;
 
     public Monster(char c,int att, int def, int EXP,String name,int HP,int v) {
         super(c,att,def,EXP,name,HP);
@@ -20,11 +20,11 @@ public abstract class Monster extends Enemy {
     public char RandomMove(){
         Random red=new Random();
         switch (red.nextInt(4)){
-            case 0: return 'w';
-            case 1:return 'd';
-            case 2: return 'a';
-            case 3:return 's';
-            default: return 'q';
+            case 0: return Controller.UP;
+            case 1:return Controller.RIGHT;
+            case 2: return Controller.LEFT;
+            case 3:return Controller.DOWN;
+            default: return Controller.WAIT;
         }
     }
     private String hunt(Player p){
@@ -32,12 +32,12 @@ public abstract class Monster extends Enemy {
         double x=frame.pos.x-p.frame.pos.x;
         double y=frame.pos.y-p.frame.pos.y;
         if(Math.abs(x)<Math.abs(y)){
-            if(y>0) out+=super.action('a');
-            else out+=super.action('d');
+            if(y>0) out+=super.action(Controller.LEFT);
+            else out+=super.action(Controller.RIGHT);
         }
         else{
-            if(x>0) out+=super.action('w');
-            else out+=super.action('s');
+            if(x>0) out+=super.action(Controller.UP);
+            else out+=super.action(Controller.DOWN);
         }
         return out;
     }

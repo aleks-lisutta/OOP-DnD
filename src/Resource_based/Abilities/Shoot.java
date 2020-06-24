@@ -73,4 +73,9 @@ public class Shoot extends PlayerAbility {
     public String Tick() {
         return arr.Tick(p.name);
     }
+
+    @Override
+    public String toString(){
+        return "Arrows left: "+arr.getCur();
+    }
 }

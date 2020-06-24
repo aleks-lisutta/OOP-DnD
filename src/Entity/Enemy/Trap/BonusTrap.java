@@ -9,8 +9,5 @@ public class BonusTrap extends Trap {
         super('B',1,1,250,"Bonus Trap",1);
         setUpVisibility(1,5);
     }
-    @Override
-    public String Turn(Player p){
-        return setStatus();
-    }
+
 }

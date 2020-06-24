@@ -4,8 +4,9 @@ import Entity.Enemy.Enemy;
 import Entity.Player.Player;
 
 public class Wall extends Tile {
+    private static final char CHR='#';
     public Wall(){
-        super('#');
+        super(CHR);
     }
 
     @Override

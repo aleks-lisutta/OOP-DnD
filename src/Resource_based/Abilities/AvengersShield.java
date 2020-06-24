@@ -62,5 +62,8 @@ public class AvengersShield extends PlayerAbility {
          return cool.Tick(p.name);
     }
 
-
+    @Override
+    public String toString(){
+        return  "Avengers Shield available"+(canUse()? "." : " in "+cool.getCur()+" turns.");
+    }
 }

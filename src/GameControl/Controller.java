@@ -24,6 +24,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Controller {
+    public static final char LEFT='a';
+    public static final char RIGHT='d';
+    public static final char UP='w';
+    public static final char DOWN='s';
+    public static final char WAIT='q';
+    public static final char ABILITY='e';
+
     public Player player;
     public int curBoard;
     public List<Board> levels;
@@ -71,12 +78,15 @@ public class Controller {
         return output;
     }
 
+    public String stats(){
+        return player.stats();
+    }
     public void setPlayer(Player player) {
         this.player=player;
     }
 
     public boolean finish(){
-        if (player.isDead || enemyList.size()<curBoard )
+        if (player.isDead || enemyList.size()<=curBoard )
             return true;
         return false;
     }
@@ -87,14 +97,18 @@ public class Controller {
             if (!finish()) {
                 levels.get(curBoard).setPlayerFrame(player);
                 player.setFrame(levels.get(curBoard).getPlayerFrame());
+                return "you finished level:"+curBoard+"\n";
             }
-            return "you finished level:"+curBoard;
+            return "\n--------------------------------\nCongratulations, you won the game!\n--------------------------------\n";
         }
         return "";
     }
 
     public String display() {
-        return levels.get(curBoard).display();
+        if(!finish()) {
+            return levels.get(curBoard).display();
+        }
+        return "";
     }
 
     public String action(String actionChar){

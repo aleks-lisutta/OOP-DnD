@@ -16,7 +16,7 @@ public class Arrows extends Resource {
             tick=0;
         }
         else tick++;
-        return name + " have a "+cur+" arrows.";
+        return "";
     }
     public void SetArrows(int arr){
         if (arr>=0)

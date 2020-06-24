@@ -8,7 +8,7 @@ import Resource_based.Resources.Arrows;
 
 import java.util.List;
 
-public abstract class Hunter extends Player {
+public class Hunter extends Player {
     public Hunter(int att, int def, String name, int HP,int range) {
         super(att, def, name, HP,range,new Shoot());
     }

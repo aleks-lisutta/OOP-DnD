@@ -25,20 +25,16 @@ public class Board {
         }
         return output.toString();
     }
-//    public void setPos(List<Tile> tiles) {
-//        for (Tile tile : tiles) {
-//            boardArray[tile.getPosX()][tile.getPosY()] = tile;
-//        }
-//    }
+
     public List<TileFrame> action(TileFrame frame,char c){
         List<TileFrame> out=new LinkedList<>();
-        if (c=='a' && frame.gety()>0)
+        if (c==Controller.LEFT && frame.gety()>0)
             out.add(boardArray[frame.getx()][frame.gety()-1]);
-        if (c=='d' && frame.gety()<sizeY-1)
+        if (c==Controller.RIGHT && frame.gety()<sizeY-1)
             out.add( boardArray[frame.getx()][frame.gety()+1]);
-        if (c=='w' && frame.getx()>0)
+        if (c==Controller.UP && frame.getx()>0)
             out.add( boardArray[frame.getx()-1][frame.gety()]);
-        if (c=='s' && frame.getx()<sizeX-1)
+        if (c==Controller.DOWN && frame.getx()<sizeX-1)
             out.add( boardArray[frame.getx()+1][frame.gety()]);
         return out;
     }

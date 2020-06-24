@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.DoubleToIntFunction;
 
-public abstract class Warrior extends Player {
+public class Warrior extends Player {
     AvengersShield ability;
 
     public Warrior(int att,int def,String name, int HP,int ab){
