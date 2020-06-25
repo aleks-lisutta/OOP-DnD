@@ -2,24 +2,15 @@ package GameControl;
 
 import Entity.Enemy.Enemy;
 import Entity.Player.Player;
-import Entity.Tile.Empty;
-import Entity.Tile.Tile;
-import Entity.Tile.TileFrame;
-import GameControl.Utils;
-
-import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Dictionary;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.DoubleToIntFunction;
-import java.util.logging.Level;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -68,7 +59,7 @@ public class Controller {
             File myObj = new File(path);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
+               String data = myReader.nextLine();
                output.add(data);
             }
             myReader.close();

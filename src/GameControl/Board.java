@@ -4,7 +4,6 @@ import Entity.Player.Player;
 import Entity.Tile.Pos;
 import Entity.Tile.Tile;
 import Entity.Tile.TileFrame;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,15 +43,15 @@ public class Board {
 
         for (int i=0; i<lines.size();i++) {
             for (int j = 0; j < lines.get(i).length(); j++) {
-                Tuple tup=Utils.getTile(lines.get(i).charAt(j));
-                Enemy e=tup.enemy;
+                Tuple<Tile,Enemy> tup=Utils.getTile(lines.get(i).charAt(j));
+                Enemy e=tup.e;
                 if(e!=null) {
                     out.add(e);
                     boardArray[i][j] = new TileFrame(e,new Pos(i,j),this);
                     e.setFrame(boardArray[i][j]);
                 }
                 else {
-                    Tile t = tup.tile;
+                    Tile t = tup.t;
                     boardArray[i][j] = new TileFrame(t, new Pos(i, j), this);
                     if (t != null) t.setFrame(boardArray[i][j]);
                     else {

@@ -1,4 +1,4 @@
-package Entity.Enemy.Monster;
+package Entity.Enemy;
 
 import Entity.Enemy.Enemy;
 import Entity.Player.Player;

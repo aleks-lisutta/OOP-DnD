@@ -1,7 +1,6 @@
 package Resource_based.Abilities;
 
-import Entity.Enemy.Bosses.Boss;
-import Entity.Enemy.Enemy;
+import Entity.Enemy.Boss;
 import Entity.Player.Player;
 import Entity.Tile.Unit;
 

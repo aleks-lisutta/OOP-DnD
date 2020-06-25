@@ -10,6 +10,10 @@ public abstract class Resource {
     public int getMax(){
         return max;
     }
+    public void setMax(int nu){
+        if(nu>1) max=nu;
+        else max=1;
+    }
     public int getCur(){
         return cur;
     }

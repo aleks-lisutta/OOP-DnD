@@ -1,4 +1,4 @@
-package Entity.Enemy.Trap;
+package Entity.Enemy;
 
 import Entity.Enemy.Enemy;
 import Entity.Player.Player;
@@ -13,11 +13,12 @@ public class Trap extends Enemy {
     public int inVisibility;
     public char chr2;
     public boolean visible;
-    public Trap(char c, int att, int def, int EXP, String name, int HP) {
+    public Trap(char c, int att, int def, int EXP, String name, int HP,int a, int b) {
         super(c, att, def,EXP,name,HP);
         chr2= Empty.CHR;
         visible=true;
         tickCounter=1;
+        setUpVisibility(a,b);
     }
     public void setUpVisibility(int a, int b){
         visibility=a;

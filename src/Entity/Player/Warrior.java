@@ -1,4 +1,4 @@
-package Entity.Player.Warrior;
+package Entity.Player;
 
 import Entity.Player.Player;
 import Entity.Tile.Tile;
@@ -22,9 +22,10 @@ public class Warrior extends Player {
 
     @Override
     public void levelUpSpacialAbility(){
-        hp.SetPool(hp.getMax()+5*lvl);
+        hp.setMax(hp.getMax()+5*lvl);
         att=att+2*lvl;
         def+=1;
+        super.levelUpSpacialAbility();
     }
 
 }

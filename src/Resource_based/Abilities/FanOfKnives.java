@@ -1,8 +1,6 @@
 package Resource_based.Abilities;
 
 import Entity.Enemy.Enemy;
-import Entity.Player.Player;
-import Entity.Player.Rogues.Rogue;
 import Entity.Tile.Unit;
 import Resource_based.Resources.Energy;
 

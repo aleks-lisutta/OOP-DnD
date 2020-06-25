@@ -23,7 +23,7 @@ public class Arrows extends Resource {
             cur=arr;
     }
     public void LevelUp(){
-
+        System.out.println("in arrow lvlup");
         lvl++;
         SetArrows(cur+10*lvl);
     }

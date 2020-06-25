@@ -1,6 +1,6 @@
 package Entity.Player;
 
-import Entity.Enemy.Bosses.Boss;
+import Entity.Enemy.Boss;
 import Entity.Enemy.Enemy;
 import Entity.Heroic;
 import Entity.Tile.*;
@@ -39,9 +39,11 @@ public abstract class Player extends Unit implements Heroic {
         String out="";
         while(exp>=nextExp){
             exp=exp-(nextExp);
+            nextExp+=lvl*NEXT_EXP_MODIFIER;
             lvl+=1;
+            System.out.println("??????????????????????????????????  "+lvl+"  ?????????????????????????????????????\nexp: "+exp+"\nnext lvl at: "+nextExp);
             setUpAbilityLevel();
-            setUpNextLevel();
+
             out+="\n--------------------------------------\n"+name+" leveled up to level: "+lvl+ ".\n details: \n Attack: "+att+" \n Defense: "+def +"\n exp: "+exp
                     +"\n next level at: "+nextExp+"\n--------------------------------------\n";
         }
@@ -79,9 +81,7 @@ public abstract class Player extends Unit implements Heroic {
     public String cast(List<Unit> ls) {
         return ability.useAbility(ls);
     }
-    private void setUpNextLevel(){
-        nextExp=lvl*NEXT_EXP_MODIFIER;
-    }
+
     public void setUpAbilityLevel() {
         att = ATT_MODIFIER * lvl + att;
         def = DEF_MODIFIER*lvl + def;

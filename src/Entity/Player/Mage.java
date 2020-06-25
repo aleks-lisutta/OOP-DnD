@@ -1,4 +1,4 @@
-package Entity.Player.Mages;
+package Entity.Player;
 
 import Entity.Player.Player;
 import Entity.Tile.Tile;

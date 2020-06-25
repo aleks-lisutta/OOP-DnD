@@ -1,7 +1,6 @@
 package Resource_based.Abilities;
 
 import Entity.Enemy.Enemy;
-import Entity.Player.Hunter.Hunter;
 import Entity.Player.Player;
 import Entity.Tile.Unit;
 import GameControl.Utils;
@@ -9,8 +8,6 @@ import Resource_based.Resources.Arrows;
 
 
 import java.util.List;
-import java.util.Random;
-import java.util.function.DoubleToIntFunction;
 
 public class Shoot extends PlayerAbility {
     Arrows arr;
@@ -32,7 +29,7 @@ public class Shoot extends PlayerAbility {
             return useAbility(ls);
         }
         arr.use();
-        return u.receiveCast(this);
+        return output;
     }
     public String attack(Enemy e){
         int defRoll = (int) (Math.random() * e.def);

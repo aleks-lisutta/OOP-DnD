@@ -1,7 +1,5 @@
 package Resource_based.Abilities;
 import Entity.Enemy.Enemy;
-import Entity.Player.Player;
-import Entity.Player.Warrior.Warrior;
 import Entity.Tile.Unit;
 import Resource_based.Resources.Cooldown;
 import java.util.List;
