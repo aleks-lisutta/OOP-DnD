@@ -51,7 +51,10 @@ public class Service {
             System.out.println(output);
             output="";
         }
-        System.out.println();
-
+        System.out.println("would you like to play again?\n press y to play again, press any other button to leave.\n");
+        String s=scan.nextLine();
+        if(s.length()>0 && s.charAt(0)=='y'){
+            Start();
+        }
     }
 }
