@@ -33,7 +33,7 @@ public class Boss extends Monster implements Heroic {
         return "";
     }
     public String Turn(Player p){
-        if(Utils.RANGE(p.frame,this.frame)<vision_range & tick==frequency){
+        if(Utils.RANGE(p.getFrame(),this.frame)<vision_range & tick==frequency){
             List<Unit> u=new LinkedList<>();
             u.add(p);
             String output=cast(u);
@@ -43,10 +43,9 @@ public class Boss extends Monster implements Heroic {
         return super.Turn(p);
     }
 
-    public String Tick(){
+    public void Tick(){
         if (tick<frequency)
             tick++;
-        return "";
     }
 
 }

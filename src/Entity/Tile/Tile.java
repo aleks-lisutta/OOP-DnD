@@ -4,8 +4,22 @@ import Entity.Enemy.Enemy;
 import Entity.Player.Player;
 
 public abstract class Tile {
-    public TileFrame frame=null;
-    public char chr;
+    protected TileFrame frame=null;
+    protected char chr;
+
+    public void setChr(char chr) {
+        this.chr = chr;
+    }
+
+    public TileFrame getFrame() {
+        return frame;
+    }
+
+    public char getChr() {
+        return chr;
+    }
+
+
 
     public Tile(char c){
         chr=c;
@@ -23,10 +37,10 @@ public abstract class Tile {
     public abstract boolean isDead();
     public void swapFrame(Tile t){
         TileFrame tmp=frame;
-        frame=t.frame;
+        frame=t.getFrame();
         frame.setTile(this);
         t.setFrame(tmp);
-        t.frame.setTile(t);
+        t.getFrame().setTile(t);
     }
 
 }

@@ -24,7 +24,7 @@ public class Trap extends Enemy {
     }
 
     public String attack(Player p){
-        String output=p.name+" walked withing "+RANGE+" tiles from "+name+" , "+name+" attempting to attack " +p.name +"\n";
+        String output=p.getName()+" walked withing "+RANGE+" tiles from "+name+" , "+name+" attempting to attack " +p.getName() +"\n";
         if(!visible) {
             visible = true;
             swapChar();
@@ -38,12 +38,12 @@ public class Trap extends Enemy {
         chr2=temp;
     }
     public String reciveMove(Player p){
-        return visible ? super.reciveMove(p) : p.name+" can not move to Tile in position:" +frame.pos+" there is an invisible trap in the way.";
+        return visible ? super.reciveMove(p) : p.getName()+" can not move to Tile in position:" +frame.getPos()+" there is an invisible trap in the way.";
     }
 
     @Override
     public String Turn(Player p) {
-        if (Utils.RANGE(frame,p.frame)<RANGE) {
+        if (Utils.RANGE(frame,p.getFrame())<RANGE) {
             return attack(p);
         }
         return setStatus();
@@ -53,14 +53,14 @@ public class Trap extends Enemy {
             tickCounter=tickCounter-visibility;
             visible=false;
             swapChar();
-            return  name+" at position: "+frame.pos+" became invisible.\n";
+            return  name+" at position: "+frame.getPos()+" became invisible.\n";
         }
         else if (!visible & tickCounter>inVisibility)
         {
             tickCounter=tickCounter-inVisibility;
             visible=true;
             swapChar();
-            return  name+" at position: "+frame.pos+" became visible.\n";
+            return  name+" at position: "+frame.getPos()+" became visible.\n";
         }
         tickCounter+=1;
         return "";

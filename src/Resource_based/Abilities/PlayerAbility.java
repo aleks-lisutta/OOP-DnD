@@ -12,6 +12,6 @@ public abstract class PlayerAbility{
     public abstract String useAbility(List<Unit> ls);
     protected abstract boolean canUse();
     public abstract void LevelUp();
-    public abstract String Tick();
+    public abstract void Tick();
     public abstract String attack(Enemy e);
 }

@@ -17,6 +17,6 @@ public class Wall extends Tile {
         return "";
     }
     public String reciveMove(Player p){
-        return p.name+" tried to walk into a wall, nothing happened.\n";
+        return p.getName()+" tried to walk into a wall, nothing happened.\n";
     }
 }

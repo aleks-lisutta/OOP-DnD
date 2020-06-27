@@ -24,12 +24,12 @@ public class Blizzard extends PlayerAbility {
     @Override
     public String useAbility(List<Unit> ls) {
         if (!canUse())
-            return p.name+" can attack with ability more then "+" turns.\n";
+            return p.getName()+" can attack with ability more then "+" turns.\n";
         mana.use();
         if (ls.size()>0){
             int hits=0;
             StringBuilder output=new StringBuilder();
-            output.append(p.name).append(" used with ability attack\n");
+            output.append(p.getName()).append(" used with ability attack\n");
             while (ls.size()>0 & hits<hitsCount)
             {
                 Unit u=ls.get(selectNumber(ls.size()));
@@ -47,16 +47,16 @@ public class Blizzard extends PlayerAbility {
             }
             return output.toString();
         }
-        return p.name+" used with ability but dont have enemies in his range.\n";
+        return p.getName()+" used with ability but dont have enemies in his range.\n";
     }
 
     public String attack(Enemy e) {
-        int defRoll = (int) (Math.random() * e.def);
+        int defRoll = (int) (Math.random() * e.getDef());
         if (spellPower > defRoll) {
             String output=(e.injured(spellPower,p));
             return output;
         }
-        return e.name+" success to def the attack.\n";
+        return e.getName()+" success to def the attack.\n";
     }
 
     private int selectNumber(int a){
@@ -77,8 +77,8 @@ public class Blizzard extends PlayerAbility {
     }
 
     @Override
-    public String Tick() {
-        return mana.Tick(p.name);
+    public void Tick() {
+        mana.Tick();
     }
 
     @Override

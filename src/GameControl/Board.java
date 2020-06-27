@@ -44,18 +44,18 @@ public class Board {
         for (int i=0; i<lines.size();i++) {
             for (int j = 0; j < lines.get(i).length(); j++) {
                 Tuple<Tile,Enemy> tup=Utils.getTile(lines.get(i).charAt(j));
-                Enemy e=tup.e;
+                Enemy e=tup.getE();
                 if(e!=null) {
                     out.add(e);
                     boardArray[i][j] = new TileFrame(e,new Pos(i,j),this);
                     e.setFrame(boardArray[i][j]);
                 }
                 else {
-                    Tile t = tup.t;
+                    Tile t = tup.getT();
                     boardArray[i][j] = new TileFrame(t, new Pos(i, j), this);
                     if (t != null) t.setFrame(boardArray[i][j]);
                     else {
-                        boardArray[i][j].tile = player;
+                        boardArray[i][j].setTile(player);
                         playerFrame = boardArray[i][j];
                         player.setFrame(playerFrame);
                     }
@@ -71,6 +71,6 @@ public class Board {
     }
 
     public void setPlayerFrame(Player p) {
-        playerFrame.tile = p;
+        playerFrame.setTile(p);
     }
 }

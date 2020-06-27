@@ -8,9 +8,8 @@ public class Energy extends Resource {
         cur=max;
     }
 
-    public String Tick(String name){
+    public void Tick(){
         setCur(cur+10);
-        return "";
     }
 
 }

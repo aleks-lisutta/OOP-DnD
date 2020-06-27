@@ -6,9 +6,8 @@ public class Cooldown extends Resource {
         setCur(0);
     }
 
-    public String Tick(String name) {
+    public void Tick() {
         setCur(cur-1);
-        return "";
     }
     public void LevelUp(){setCur(0);}
 

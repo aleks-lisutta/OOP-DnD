@@ -17,7 +17,7 @@ public class Empty extends Tile {
     }
     public String reciveMove(Player p) {
         swapFrame(p);
-        return p.name+" walked to position "+p.frame.pos+"\n";
+        return p.getName()+" walked to position "+p.getFrame().getPos()+"\n";
     }
 
     @Override

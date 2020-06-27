@@ -17,10 +17,10 @@ public class FanOfKnives extends PlayerAbility {
     @Override
     public String useAbility(List<Unit> ls) {
         if (!canUse())
-            return p.name+" can not use with ability, "+p.name+" need more energy.\n";
+            return p.getName()+" can not use with ability, "+p.getName()+" need more energy.\n";
         energy.setCur(energy.getCur()-cost);
         if (ls.size()==0)
-            return p.name+" used with ability but enemies no exist in your range.\n";
+            return p.getName()+" used with ability but enemies no exist in your range.\n";
         StringBuilder output=new StringBuilder();
         for(Unit u: ls){
             String check=u.receiveCast(this);
@@ -30,11 +30,11 @@ public class FanOfKnives extends PlayerAbility {
         return output.toString();
     }
     public String attack(Enemy e) {
-        int defRoll = (int) (Math.random() * e.def);
-        if (p.att > defRoll) {
-            return e.injured(p.att - defRoll, p);
+        int defRoll = (int) (Math.random() * e.getDef());
+        if (p.getAtt() > defRoll) {
+            return e.injured(p.getAtt() - defRoll, p);
         }
-        return e.name+" success to def the attack.\n";
+        return e.getName()+" success to def the attack.\n";
     }
 
     @Override
@@ -48,8 +48,7 @@ public class FanOfKnives extends PlayerAbility {
     }
 
     @Override
-    public String Tick() {
-       return energy.Tick(p.name);
+    public void Tick() { energy.Tick();
     }
 
     @Override

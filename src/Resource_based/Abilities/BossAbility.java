@@ -19,10 +19,10 @@ public class BossAbility {
         return output.toString();
     }
     public String attack(Player p){
-        int defRoll = (int) (Math.random() * p.def);
-        int attWar=p.att;
+        int defRoll = (int) (Math.random() * p.getDef());
+        int attWar=p.getAtt();
         if (attWar>defRoll)
             return p.injured(attWar-defRoll,b);
-        return p.name+" success to def the attack.\n";
+        return p.getName()+" success to def the attack.\n";
     }
 }

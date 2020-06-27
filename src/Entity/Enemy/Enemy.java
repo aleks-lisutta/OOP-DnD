@@ -6,7 +6,13 @@ import Resource_based.Abilities.BossAbility;
 import Resource_based.Abilities.PlayerAbility;
 
 public abstract class Enemy extends Unit {
-    public int EXP;
+
+    protected final int EXP;
+
+    public int getEXP() {
+        return EXP;
+    }
+
 
     public Enemy(char c, int att, int def, int EXP, String name, int HP) {
         super(c,att,def,name,HP);
@@ -44,11 +50,11 @@ public abstract class Enemy extends Unit {
     public String injured(int cost, Player p){
         hp.setCur(hp.getCur()-cost);
         StringBuilder output=new StringBuilder();
-        output.append(p.name).append(" hit ").append(name).append(" with his ability, dealing ").append(cost).append(" damage.\n");
+        output.append(p.getName()).append(" hit ").append(name).append(" with his ability, dealing ").append(cost).append(" damage.\n");
 
         if (hp.getCur()==0){
             isDead=true;
-            output.append(p.name).append(" killed ").append(name).append("\n");
+            output.append(p.getName()).append(" killed ").append(name).append("\n");
             output.append(p.kill(this));
             abilityKill();
             return output.toString();
@@ -72,7 +78,7 @@ public abstract class Enemy extends Unit {
         return name+" accidentally killed "+e.name+".\n";
     }
 
-    public String Tick(){
-        return ""; //override this in boss, dont override in monster or trap
+    public void Tick(){
+         //override this in boss, dont override in monster or trap
     }
 }

@@ -10,9 +10,8 @@ public class Mana extends Resource {
         lvl=1;
     }
 
-    public String Tick(String name){
+    public void Tick(){
         setCur(cur+lvl);
-        return "";
     }
     public void LevelUp(){
         max+=(25*lvl);

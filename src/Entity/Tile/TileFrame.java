@@ -8,8 +8,13 @@ import java.util.List;
 
 public class TileFrame {
     public Tile tile;
-    public final Pos pos;
+    protected final Pos pos;
     public final Board board;
+
+    public Pos getPos() {
+        return pos;
+    }
+
     public TileFrame(Tile t, Pos p, Board b){
         tile=t;
         pos=p;
@@ -17,7 +22,7 @@ public class TileFrame {
     }
     public String reciveMove(Unit u){
         String out=u.move(tile);
-        if(tile.isDead()){
+        if(tile.isDead() & tile.getChr()!='X'){
             tile=new Empty();
             tile.setFrame(this);
             tile.swapFrame(u);
@@ -43,8 +48,8 @@ public class TileFrame {
     public void setTile(Tile t){
         tile=t;
     }
-    public Integer getx(){return pos.x;}
-    public Integer gety(){return pos.y;}
+    public Integer getx(){return pos.getX();}
+    public Integer gety(){return pos.getY();}
     @Override
     public String toString() {
         return tile.toString();

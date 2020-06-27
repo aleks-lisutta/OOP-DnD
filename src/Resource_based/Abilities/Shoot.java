@@ -18,7 +18,7 @@ public class Shoot extends PlayerAbility {
     @Override
     public String useAbility(List<Unit> ls) {
         if (!canUse())
-            return p.name+" does not have a arrows.\n";
+            return p.getName()+" does not have a arrows.\n";
         if (ls.size()==0)
             return "does not exist enemies in his range.\n";
         Unit u=selectClosest(ls,p);
@@ -32,19 +32,19 @@ public class Shoot extends PlayerAbility {
         return output;
     }
     public String attack(Enemy e){
-        int defRoll = (int) (Math.random() * e.def);
-        if (p.att>defRoll){
-            return e.injured(p.att-defRoll, p);
+        int defRoll = (int) (Math.random() * e.getDef());
+        if (p.getAtt()>defRoll){
+            return e.injured(p.getAtt()-defRoll, p);
         }
-        return e.name+" success to def the attack.\n";
+        return e.getName()+" success to def the attack.\n";
     }
     private Unit selectClosest(List<Unit> units,Player p){
         Unit output=units.get(0);
-        double MinRange=Utils.RANGE(output.frame,p.frame);
+        double MinRange=Utils.RANGE(output.getFrame(),p.getFrame());
         if (MinRange==1)
             return output;
         for (Unit u: units){
-            double range=Utils.RANGE(u.frame,p.frame);
+            double range=Utils.RANGE(u.getFrame(),p.getFrame());
             if (range==1)
                 return u;
             if (range<MinRange)
@@ -67,8 +67,8 @@ public class Shoot extends PlayerAbility {
     }
 
     @Override
-    public String Tick() {
-        return arr.Tick(p.name);
+    public void Tick() {
+         arr.Tick();
     }
 
     @Override

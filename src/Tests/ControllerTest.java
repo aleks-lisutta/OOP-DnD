@@ -21,8 +21,8 @@ class ControllerTest {
     @Test
     void stats() {
         String check=c.stats();
-        Assert.assertTrue("check attack",check.contains("Attack: "+p.att));
-        Assert.assertTrue("check attack",check.contains("Defence: "+p.def));
+        Assert.assertTrue("check attack",check.contains("Attack: "+p.getAtt()));
+        Assert.assertTrue("check attack",check.contains("Defence: "+p.getDef()));
     }
 
     @Test

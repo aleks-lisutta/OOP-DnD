@@ -34,7 +34,6 @@ public abstract class Player extends Unit implements Heroic {
         this.range=range;
         this.ability=ability;
     }
-
     public String levelUp(){
         String out="";
         while(exp>=nextExp){
@@ -49,7 +48,7 @@ public abstract class Player extends Unit implements Heroic {
         return out;
     }
     public String move(Tile t){
-        String output=name+" tried to move to position "+t.frame.pos+".\n";
+        String output=name+" tried to move to position "+t.getFrame().getPos()+".\n";
         output+=t.reciveMove(this);
         return output;
     }
@@ -59,7 +58,7 @@ public abstract class Player extends Unit implements Heroic {
         return super.die(u);
     }
     public boolean isDead(){
-        return false;
+        return isDead;
     }
     @Override
     public String reciveMove(Enemy e) {
@@ -95,8 +94,8 @@ public abstract class Player extends Unit implements Heroic {
     }
 
     public String kill(Enemy e){
-        exp+=e.EXP;
-        String out=name+" gained "+e.EXP+" experience from killing "+e.name+".\n";
+        exp+=e.getEXP();
+        String out=name+" gained "+e.getEXP()+" experience from killing "+e.getName()+".\n";
         out+=checkLevelUp();
         return out;
     }
@@ -111,11 +110,10 @@ public abstract class Player extends Unit implements Heroic {
         else if(c==Controller.ABILITY){
             List<Unit> inRange=new LinkedList<>();
             for (Enemy e : L){
-                if (Utils.RANGE(this.frame, e.frame)<=range)
+                if (Utils.RANGE(this.frame, e.getFrame())<=range)
                     inRange.add(e);
             }
             String out=cast(inRange);
-            out+=Tick();
             return out;
         }
         else return "illegal action please try again.\n";
@@ -126,17 +124,17 @@ public abstract class Player extends Unit implements Heroic {
     public String receiveCast(PlayerAbility a) {
         return "PVP is not yet supported.\n";
     }
-    public String Tick(){
-        return ability.Tick();
+    public void Tick(){
+        ability.Tick();
     }
 
     public String injured(int cost,Boss b){
         hp.setCur(hp.getCur()-cost);
         StringBuilder output=new StringBuilder();
-        output.append(b.name).append(" hit ").append(name).append(" with his ability, dealing ").append(cost).append(" damage.\n");
+        output.append(b.getName()).append(" hit ").append(name).append(" with his ability, dealing ").append(cost).append(" damage.\n");
         if (hp.getCur()==0){
             isDead=true;////
-            output.append(b.name).append(" kill ").append(name).append("\n");
+            output.append(b.getName()).append(" kill ").append(name).append("\n");
             output.append(die(b));
             return output.toString();
         }

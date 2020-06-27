@@ -3,7 +3,6 @@ package Entity.Player;
 import Resource_based.Abilities.AvengersShield;
 
 public class Warrior extends Player {
-    AvengersShield ability;
 
     public Warrior(int att,int def,String name, int HP,int ab){
         super(att,def,name,HP,3,new AvengersShield(ab));

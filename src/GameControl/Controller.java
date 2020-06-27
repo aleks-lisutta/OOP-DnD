@@ -37,10 +37,7 @@ public class Controller {
     }
 
     public void loadBoards(String path) {
-
-     //   String cwd = System.getProperty("user.dir");
         List<String> result=new LinkedList<>();
-    //    cwd=cwd+"\\levels";
         try (Stream<Path> walk = Files.walk(Paths.get(path))) {
             result = walk.filter(Files::isRegularFile)
                     .map(x -> x.toString()).collect(Collectors.toList());
@@ -79,12 +76,14 @@ public class Controller {
     }
 
     public boolean finish(){
-        if (player.isDead || enemyList.size()<=curBoard )
+        if (player.isDead() || enemyList.size()<=curBoard )
             return true;
         return false;
     }
 
     public String endLevel(){
+        if (player.isDead())
+            return "\n-------------------------------- Game Over --------------------------------\n";
         if (enemyList.get(curBoard).size()==0){
             curBoard++;
             if (!finish()) {

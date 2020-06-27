@@ -45,9 +45,9 @@ class PlayerTest {
     public void levelUp3(){
         p.exp=100;
         p.nextExp=100;
-        int att=p.att;
+        int att=p.getAtt();
         p.levelUp();
-        Assert.assertTrue(p.att>=att+4*p.lvl);
+        Assert.assertTrue(p.getAtt()>=att+4*p.lvl);
 
     }
     @Test
@@ -76,22 +76,22 @@ class PlayerTest {
     public void levelUp7(){
         p.exp=100;
         p.nextExp=100;
-        int def=p.def;
+        int def=p.getDef();
         p.levelUp();
-        Assert.assertTrue(p.def>=def+p.lvl);
+        Assert.assertTrue(p.getDef()>=def+p.lvl);
     }
     @Test
     public void levelUp8(){
         p.exp=100;
         p.nextExp=100;
-        Assert.assertEquals(p.hp.getCur(), p.hp.getMax());
+        Assert.assertEquals(p.getHp().getCur(), p.getHp().getMax());
         p.levelUp();
-        Assert.assertEquals( p.hp.getMax(),p.hp.getCur());
+        Assert.assertEquals( p.getHp().getMax(),p.getHp().getCur());
     }
     @Test
     public void die(){
         p.die(p);
-        Assert.assertEquals('X',p.chr);
+        Assert.assertEquals('X',p.getChr());
     }
     @Test
     public void checkLevelUp(){
@@ -100,38 +100,38 @@ class PlayerTest {
     @Test
     public void Injured1(){
         Boss b=new Boss('K', 300, 150, 5000, "Night’s King", 5000, 8, 10);
-        p.hp.setCur(15);
+        p.getHp().setCur(15);
         p.injured(1,b);
-        Assert.assertEquals(14,p.hp.getCur());
+        Assert.assertEquals(14,p.getHp().getCur());
     }
     @Test
     public void Injured2(){
         Boss b=new Boss('K', 300, 150, 5000, "Night’s King", 5000, 8, 10);
-        p.hp.setCur(15);
+        p.getHp().setCur(15);
         p.injured(15,b);
         Assert.assertTrue(p.isDead);
     }
     @Test
     public void Injured3(){
         Boss b=new Boss('K', 300, 150, 5000, "Night’s King", 5000, 8, 10);
-        p.hp.setCur(15);
+        p.getHp().setCur(15);
         p.injured(15,b);
-        Assert.assertEquals('X',p.chr);
+        Assert.assertEquals('X',p.getChr());
     }
     @Test
     public void def1(){
         Enemy e=Utils.getEnemy(4);
-        p.def=0;
+        p.setDef(0);
         p.setHp(10);
-        e.att=1000;
+        e.setAtt(1000);
         p.def(e);
-        Assert.assertEquals(0,p.hp.getCur());
+        Assert.assertEquals(0,p.getHp().getCur());
     }
     @Test
     public void def2(){
         Enemy e=Utils.getEnemy(4);
-        p.def=1000;
-        e.att=0;
+        p.setDef(1000);
+        e.setAtt(0);
         Assert.assertTrue(p.def(e).contains("blocked the attack taking no damage."));
     }
 

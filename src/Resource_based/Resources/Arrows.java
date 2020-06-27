@@ -10,20 +10,18 @@ public class Arrows extends Resource {
         lvl=1;
     }
 
-    public String Tick(String name){
+    public void Tick(){
         if(tick==10){
             SetArrows(cur+lvl);
             tick=0;
         }
         else tick++;
-        return "";
     }
     public void SetArrows(int arr){
         if (arr>=0)
             cur=arr;
     }
     public void LevelUp(){
-        System.out.println("in arrow lvlup");
         lvl++;
         SetArrows(cur+10*lvl);
     }

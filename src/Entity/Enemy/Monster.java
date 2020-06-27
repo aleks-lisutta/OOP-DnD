@@ -25,8 +25,8 @@ public class Monster extends Enemy {
     }
     private String hunt(Player p){
         String out="";
-        double x=frame.pos.x-p.frame.pos.x;
-        double y=frame.pos.y-p.frame.pos.y;
+        double x=frame.getx()-p.getFrame().getx();
+        double y=frame.gety()-p.getFrame().gety();
         if(Math.abs(x)<Math.abs(y)){
             if(y>0) out+=super.action(Controller.LEFT);
             else out+=super.action(Controller.RIGHT);
@@ -40,7 +40,7 @@ public class Monster extends Enemy {
     @Override // override again in boss
     public String Turn(Player p) {
         String out="";
-        if(Utils.RANGE(p.frame,this.frame)<vision_range){
+        if(Utils.RANGE(p.getFrame(),this.frame)<vision_range){
             out+=hunt(p);
         }
         else{

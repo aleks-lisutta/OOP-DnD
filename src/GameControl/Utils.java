@@ -75,7 +75,7 @@ public class Utils {
     public static Enemy getEnemy(int i) { return enemyMap.get(i).get(); }
 
    /*
-    public static Tuple getTile(char c){
+    public static Tuple getTile(char c){//for testing
         switch (c){
             case 'C':
             case 'M':

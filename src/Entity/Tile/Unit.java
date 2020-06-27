@@ -6,13 +6,38 @@ import Resource_based.Abilities.PlayerAbility;
 import Resource_based.Resources.Health;
 
 public abstract class Unit extends Tile {
-    public String name;
-    public boolean isDead;
-    public Health hp;
-    public int att;
-    public int def;
+    protected String name;
+    public boolean isDead;//for testing this is public
+    protected Health hp;
+    protected int att;
 
-    public Unit(char c,int att, int def,String name,int HP){
+    public void setAtt(int att) {
+        this.att = att;
+    }
+
+    public void setDef(int def) {
+        this.def = def;
+    }
+
+    protected int def;
+
+    public String getName(){
+        return name;
+    }
+
+    public Health getHp() {
+        return hp;
+    }
+
+    public int getAtt() {
+        return att;
+    }
+
+    public int getDef() {
+        return def;
+    }
+
+    public Unit(char c, int att, int def, String name, int HP){
         super(c);
         this.att=att;
         this.def=def;
@@ -45,7 +70,6 @@ public abstract class Unit extends Tile {
     }
     public String action(char c){
         String out=frame.move(this,c);
-        out+=Tick();
         return out;
     }
     public void setHp(int n){
@@ -58,7 +82,7 @@ public abstract class Unit extends Tile {
     public abstract String receiveCast(BossAbility a);
     public abstract String receiveCast(PlayerAbility a);
 
-    public abstract String Tick(); //implement in each player differently
+    public abstract void Tick(); //implement in each player differently
 
 
 
