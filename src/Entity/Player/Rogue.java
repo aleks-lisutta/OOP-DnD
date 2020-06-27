@@ -1,11 +1,6 @@
 package Entity.Player;
 
-import Entity.Player.Player;
-import Entity.Tile.Tile;
-import Entity.Tile.Unit;
 import Resource_based.Abilities.FanOfKnives;
-
-import java.util.List;
 
 public class Rogue extends Player {
     public Rogue(int att, int def, String name, int HP,int cost) {

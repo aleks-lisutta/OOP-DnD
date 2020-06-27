@@ -2,7 +2,6 @@ package Entity.Tile;
 
 import Entity.Enemy.Enemy;
 import Entity.Player.Player;
-import GameControl.Board;
 
 public abstract class Tile {
     public TileFrame frame=null;

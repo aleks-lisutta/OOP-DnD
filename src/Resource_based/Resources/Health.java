@@ -8,8 +8,8 @@ public class Health extends Resource {
 
 
     public void levelUpHP(int level){
-        max=max+level*10;
-        cur=max;
+        setMax(max+level*10);
+        setCur(max);
     }
 
 }

@@ -1,10 +1,8 @@
 package Entity.Enemy;
 
-import Entity.Enemy.Enemy;
 import Entity.Player.Player;
 import Entity.Tile.Empty;
 import GameControl.Utils;
-import Resource_based.Abilities.PlayerAbility;
 
 public class Trap extends Enemy {
     private static final int RANGE=2;
@@ -66,10 +64,5 @@ public class Trap extends Enemy {
         }
         tickCounter+=1;
         return "";
-    }
-    public String receiveCast(PlayerAbility a){
-        if (visible)
-            return super.receiveCast(a);
-        return null;
     }
 }

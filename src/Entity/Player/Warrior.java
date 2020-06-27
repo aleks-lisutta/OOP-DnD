@@ -1,16 +1,6 @@
 package Entity.Player;
 
-import Entity.Player.Player;
-import Entity.Tile.Tile;
-import Entity.Tile.Unit;
-import GameControl.Utils;
 import Resource_based.Abilities.AvengersShield;
-import Resource_based.Abilities.PlayerAbility;
-
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.function.DoubleToIntFunction;
 
 public class Warrior extends Player {
     AvengersShield ability;
@@ -23,6 +13,7 @@ public class Warrior extends Player {
     @Override
     public void levelUpSpacialAbility(){
         hp.setMax(hp.getMax()+5*lvl);
+        hp.setCur(hp.getMax());
         att=att+2*lvl;
         def+=1;
         super.levelUpSpacialAbility();

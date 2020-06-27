@@ -1,4 +1,3 @@
-import Entity.Player.Player;
 import GameControl.Controller;
 import GameControl.Menu;
 
@@ -9,21 +8,22 @@ public class Service {
     public Controller con;
     public Scanner scan;
 
-    public Service(){
+    public Service(String path){
         menu= new Menu();
         scan=new Scanner(System.in);
-        choosePlayer();
+        choosePlayer(path);
         startGame();
     }
-    public void choosePlayer(){
+    public void choosePlayer(String path){
         boolean chosen=false;
         while(!chosen) {
             System.out.println(menu.options());
             try {
-                con = new Controller(menu.getPlayer(scan.nextLine()));
+                con = new Controller(menu.getPlayer(scan.nextLine()),path);
                 chosen=true;
             }
             catch(Exception e){
+                e.printStackTrace();
                 System.out.println("invalid player name, please try again.\n");
             }
         }

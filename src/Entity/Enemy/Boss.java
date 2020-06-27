@@ -1,6 +1,5 @@
 package Entity.Enemy;
 
-import Entity.Enemy.Monster;
 import Entity.Heroic;
 import Entity.Player.Player;
 import Entity.Tile.Unit;

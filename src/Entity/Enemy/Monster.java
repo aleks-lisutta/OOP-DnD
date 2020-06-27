@@ -1,13 +1,9 @@
 package Entity.Enemy;
 
-import Entity.Enemy.Enemy;
 import Entity.Player.Player;
-import Entity.Tile.Tile;
-import Entity.Tile.TileFrame;
 import GameControl.Controller;
 import GameControl.Utils;
 
-import java.util.List;
 import java.util.Random;
 
 public class Monster extends Enemy {

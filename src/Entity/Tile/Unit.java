@@ -1,7 +1,6 @@
 package Entity.Tile;
 
 import Entity.Enemy.Enemy;
-import Entity.Player.Player;
 import Resource_based.Abilities.BossAbility;
 import Resource_based.Abilities.PlayerAbility;
 import Resource_based.Resources.Health;

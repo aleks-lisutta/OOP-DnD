@@ -27,21 +27,21 @@ public class Controller {
     public List<Board> levels;
     public List<List<Enemy>> enemyList;
 
-    public Controller(Player p){
+    public Controller(Player p,String path){
         levels=new LinkedList<>();
         player=p;
         enemyList=new LinkedList<>();
-        loadBoards();
+        loadBoards(path);
         curBoard=0;
         player.setFrame(levels.get(curBoard).getPlayerFrame());
     }
 
-    public void loadBoards() {
+    public void loadBoards(String path) {
 
-        String cwd = System.getProperty("user.dir");
+     //   String cwd = System.getProperty("user.dir");
         List<String> result=new LinkedList<>();
-        cwd=cwd+"\\levels";
-        try (Stream<Path> walk = Files.walk(Paths.get(cwd))) {
+    //    cwd=cwd+"\\levels";
+        try (Stream<Path> walk = Files.walk(Paths.get(path))) {
             result = walk.filter(Files::isRegularFile)
                     .map(x -> x.toString()).collect(Collectors.toList());
         } catch (IOException e) {
@@ -53,6 +53,7 @@ public class Controller {
             levels.add(b);
         }
     }
+
     public List<String> LoadBoard(String path){
         List<String> output=new LinkedList<>();
         try {
@@ -72,6 +73,7 @@ public class Controller {
     public String stats(){
         return player.stats();
     }
+
     public void setPlayer(Player player) {
         this.player=player;
     }

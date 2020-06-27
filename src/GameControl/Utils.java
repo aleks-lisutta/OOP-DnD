@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 public class Utils {
 
-    private static List<Supplier<Player>> playerMap = Arrays.asList(
+    public static List<Supplier<Player>> playerMap = Arrays.asList(//public for testing
             () -> new Warrior(30, 4, "Jon Snow", 300, 3),
             () -> new Warrior(20, 6, "The Hound", 400, 5),
             () -> new Mage(5, 1, "Melisandre", 100, 6, 300, 30, 15, 5),

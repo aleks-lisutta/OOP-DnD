@@ -18,6 +18,7 @@ public abstract class Enemy extends Unit {
     public String reciveMove(Enemy p) {
         return "";
     }
+
     public String move(Tile t){
         String out=t.reciveMove(this);
         return out;
