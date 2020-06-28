@@ -7,7 +7,7 @@ import Resource_based.Abilities.PlayerAbility;
 
 public abstract class Enemy extends Unit {
 
-    protected final int EXP;
+    protected final int EXP; // EXP given upon death
 
     public int getEXP() {
         return EXP;
@@ -23,52 +23,48 @@ public abstract class Enemy extends Unit {
 
     public String reciveMove(Enemy p) {
         return "";
-    }
+    } //visitor receiver
 
-    public String move(Tile t){
+    public String move(Tile t){ //move to a given tile
         String out=t.reciveMove(this);
         return out;
     }
 
-    public String reciveMove(Player p){
+    public String reciveMove(Player p){ // visitor receiver
         String out=def(p);
         if(hp.getCur()<=0) {
             out+=die(p);
             out+=p.kill(this);
+            frame.setTile(new Empty());
+            frame.swapTile(p.getFrame());
         }
         else{
             out+=name+" has "+hp.getCur()+"/"+hp.getMax()+" health left.\n";
         }
         return out;
     }
-    public void abilityKill(){//we need to check that the controller remove the enemy from list.
+    public void abilityKill(){// if killed by ability update the frame
         Tile t=new Empty();
         frame.setTile(t);
         t.setFrame(frame);
     }
 
-    public String injured(int cost, Player p){
-        hp.setCur(hp.getCur()-cost);
+    public String injured(int cost, Player p){ // if injured by player ability
         StringBuilder output=new StringBuilder();
-        output.append(p.getName()).append(" hit ").append(name).append(" with his ability, dealing ").append(cost).append(" damage.\n");
-
-        if (hp.getCur()==0){
-            isDead=true;
-            output.append(p.getName()).append(" killed ").append(name).append("\n");
-            output.append(p.kill(this));
+        output.append(super.injured(cost,p));//all shared actions of all units when injured by ability
+        if (isDead){
+            output.append(p.kill(this)); //if dead award exp
             abilityKill();
-            return output.toString();
         }
-        output.append( name).append(" has ").append(hp.getCur()).append("/").append(hp.getMax()).append(" hp left.\n");
         return output.toString();
     }
 
 
 
-    public  String receiveCast(PlayerAbility a){
+    public  String receiveCast(PlayerAbility a){ // visitor receiver
         return a.attack(this);
     }
-    public  String receiveCast(BossAbility a){
+    public  String receiveCast(BossAbility a){ // visitor receiver
         return "Boss decided to attack enemy";
     }
 

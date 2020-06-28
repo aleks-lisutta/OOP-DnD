@@ -18,7 +18,7 @@ public class Menu {
         playerList.add("Ygritte");
 
     }
-    public String options() {
+    public String options() { //returns a String of all possible players
         StringBuilder output=new StringBuilder();
         for(String p: playerList){
             output.append(p).append("\n");
@@ -27,7 +27,7 @@ public class Menu {
         return output.toString();
     }
 
-    public Player getPlayer(String nextLine) {
+    public Player getPlayer(String nextLine) { //creates a player according to the given name
         int a=playerList.indexOf(nextLine);
         if(a==-1) throw new IllegalArgumentException(nextLine+" is name does not exist in the System.");
         Player output = Utils.getPlayer(a);

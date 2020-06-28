@@ -6,9 +6,9 @@ import GameControl.Board;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TileFrame {
+public class TileFrame { //the actual position in the board. holds the tile currently in this position
     public Tile tile;
-    protected final Pos pos;
+    protected final Pos pos; // position is final on creation
     public final Board board;
 
     public Pos getPos() {
@@ -20,18 +20,20 @@ public class TileFrame {
         pos=p;
         board=b;
     }
-    public String reciveMove(Unit u){
+    public void swapTile(TileFrame f){ //swap tiles with another frame
+        Tile tmp=f.getTile();
+        tile.setFrame(f);
+        f.setTile(tile);
+        tmp.setFrame(this);
+        tile=tmp;
+    }
+    public String reciveMove(Unit u){ //visitor receiver
         String out=u.move(tile);
-        if(tile.isDead() & tile.getChr()!='X'){
-            tile=new Empty();
-            tile.setFrame(this);
-            tile.swapFrame(u);
-        }
         return out;
     }
 
 
-    public String move(Unit u,char c){
+    public String move(Unit u,char c){ //perform an action from this frame
         List<TileFrame> targets=board.action(this,c);
         String out="";
         for (TileFrame tf : targets) {
@@ -39,9 +41,6 @@ public class TileFrame {
         }
         return out;
     }
-
-
-    public Board getBoard(){return board;}
 
     public Tile getTile(){return tile;}
 

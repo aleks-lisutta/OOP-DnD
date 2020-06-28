@@ -15,19 +15,15 @@ public class AvengersShield extends PlayerAbility {
     @Override
     public String useAbility(List<Unit> ls ) {
         if (!canUse())
-            return p.getName()+" can attack with ability more then "+cool.getCur()+" turns.\n";
+            return p.getName()+"can't use Avengers Shield.\n";
         if (ls.size()>0){
             Unit u=ls.get(selectNumber(ls.size()));
             String output=u.receiveCast(this);
-            if (output==null){
-                ls.remove(u);
-                return useAbility(ls);
-            }
             cool.setCur(cool.getMax());
             return output;
         }
         cool.setCur(cool.getMax());
-        return p.getName()+" used ability but no have enemies in " +p.getName()+ "'s range.\n";
+        return p.getName()+" used Avengers Shield but has no enemies in range.\n";
     }
 
     public String attack(Enemy e){
@@ -37,7 +33,7 @@ public class AvengersShield extends PlayerAbility {
         {
             return (e.injured(attWar,p));
         }
-        return e.getName()+" success to def the attack.\n";
+        return e.getName()+" defended against the attack.\n";
     }
 
     private int selectNumber(int a){

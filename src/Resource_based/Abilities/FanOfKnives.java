@@ -17,16 +17,14 @@ public class FanOfKnives extends PlayerAbility {
     @Override
     public String useAbility(List<Unit> ls) {
         if (!canUse())
-            return p.getName()+" can not use with ability, "+p.getName()+" need more energy.\n";
+            return p.getName()+"can't use Fan of Knives.\n";
         energy.setCur(energy.getCur()-cost);
         if (ls.size()==0)
-            return p.getName()+" used with ability but enemies no exist in your range.\n";
+            return p.getName()+" used Fan of Knives but has no enemies in range\n";
         StringBuilder output=new StringBuilder();
-        for(Unit u: ls){
-            String check=u.receiveCast(this);
-            if (check!=null)
-                 output.append(check);
-            }
+        for(Unit u: ls) {
+            output.append(u.receiveCast(this));
+        }
         return output.toString();
     }
     public String attack(Enemy e) {
@@ -34,7 +32,7 @@ public class FanOfKnives extends PlayerAbility {
         if (p.getAtt() > defRoll) {
             return e.injured(p.getAtt() - defRoll, p);
         }
-        return e.getName()+" success to def the attack.\n";
+        return e.getName()+" defended against the attack.\n";
     }
 
     @Override

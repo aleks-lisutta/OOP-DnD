@@ -24,30 +24,23 @@ public class Blizzard extends PlayerAbility {
     @Override
     public String useAbility(List<Unit> ls) {
         if (!canUse())
-            return p.getName()+" can attack with ability more then "+" turns.\n";
+            return p.getName()+" can't use Blizzard.\n";
         mana.use();
         if (ls.size()>0){
             int hits=0;
             StringBuilder output=new StringBuilder();
-            output.append(p.getName()).append(" used with ability attack\n");
+            output.append(p.getName()).append(" used Blizzard.\n");
             while (ls.size()>0 & hits<hitsCount)
             {
                 Unit u=ls.get(selectNumber(ls.size()));
-                String check=u.receiveCast(this);
-                if (check==null)
-                {
-                    ls.remove(u);
-                }
-                else {
-                    output.append(check);
-                    if (u.isDead())
-                        ls.remove(u);
-                    hits += 1;
-                }
+                output.append(u.receiveCast(this));
+                if (u.isDead())
+                    ls.remove(u); //dont cast again on a dead enemy
+                hits += 1;
             }
             return output.toString();
         }
-        return p.getName()+" used with ability but dont have enemies in his range.\n";
+        return p.getName()+" used Blizzard but has no enemies in range.\n";
     }
 
     public String attack(Enemy e) {
@@ -56,7 +49,7 @@ public class Blizzard extends PlayerAbility {
             String output=(e.injured(spellPower,p));
             return output;
         }
-        return e.getName()+" success to def the attack.\n";
+        return e.getName()+" defended against the attack.\n";
     }
 
     private int selectNumber(int a){
@@ -68,6 +61,7 @@ public class Blizzard extends PlayerAbility {
     protected boolean canUse() {
         return mana.getCur()>=cost;
     }
+
 
     @Override
     public void LevelUp() {

@@ -24,8 +24,8 @@ public class Controller {
 
     public Player player;
     public int curBoard;
-    public List<Board> levels;
-    public List<List<Enemy>> enemyList;
+    public List<Board> levels; //list of all currently loaded boards
+    public List<List<Enemy>> enemyList; // list of all enemy groups in all boards
 
     public Controller(Player p,String path){
         levels=new LinkedList<>();
@@ -36,7 +36,9 @@ public class Controller {
         player.setFrame(levels.get(curBoard).getPlayerFrame());
     }
 
-    public void loadBoards(String path) {
+    public String getPlayerName(){return player.getName();}
+
+    public void loadBoards(String path) { // load all of the levels into the game
         List<String> result=new LinkedList<>();
         try (Stream<Path> walk = Files.walk(Paths.get(path))) {
             result = walk.filter(Files::isRegularFile)
@@ -51,7 +53,7 @@ public class Controller {
         }
     }
 
-    public List<String> LoadBoard(String path){
+    public List<String> LoadBoard(String path){ //parse each lvl into a list of strings (each layer is one string)
         List<String> output=new LinkedList<>();
         try {
             File myObj = new File(path);
@@ -69,41 +71,41 @@ public class Controller {
 
     public String stats(){
         return player.stats();
-    }
+    } //return player stats
 
     public void setPlayer(Player player) {
         this.player=player;
     }
 
-    public boolean finish(){
-        if (player.isDead() || enemyList.size()<=curBoard )
+    public boolean finish(){ //function to check if game needs to continue
+        if (player.isDead() || levels.size()<=curBoard )
             return true;
         return false;
     }
 
-    public String endLevel(){
+    public String endLevel(){  // check if current lvl is finished and advance a level or end the game
         if (player.isDead())
-            return "\n-------------------------------- Game Over --------------------------------\n";
-        if (enemyList.get(curBoard).size()==0){
+            return display()+"\n-------------------------------- Game Over --------------------------------\n";
+        if (enemyList.get(curBoard).size()==0){ // if no more enemies on the current board advance level
             curBoard++;
-            if (!finish()) {
+            if (!finish()) { // if game is not over advance
                 levels.get(curBoard).setPlayerFrame(player);
                 player.setFrame(levels.get(curBoard).getPlayerFrame());
                 return "you finished level:"+curBoard+"\n";
             }
-            return "\n--------------------------------\nCongratulations, you won the game!\n--------------------------------\n";
+            return display()+"\n--------------------------------\nCongratulations, you won the game!\n--------------------------------\n";
         }
-        return "";
+        return ""; //return nothing if no need to advance or end the game
     }
 
-    public String display() {
-        if(!finish()) {
+    public String display() { // return a string with the current board
+        if(curBoard<levels.size()){
             return levels.get(curBoard).display();
         }
         return "";
     }
 
-    public String action(String actionChar){
+    public String action(String actionChar){ //perform an action if it's legal
         if (actionChar==null|| actionChar.length()!=1){
             throw new IllegalArgumentException("the action is illegal.");
         }
@@ -112,15 +114,15 @@ public class Controller {
         return log.toString();
     }
 
-    public String enemyTurn() {
-        String out="";
+    public String enemyTurn() { // loop through all enemies and make each one perform its turn
+        StringBuilder output=new StringBuilder();
         for(int i=0; i<enemyList.get(curBoard).size();i++){
             Enemy temp=enemyList.get(curBoard).get(i);
             if(!temp.isDead()) {
-                out+=temp.Turn(player);
+                output.append(temp.Turn(player));
             }
             else {enemyList.get(curBoard).remove(temp);}
         }
-        return out;
+        return output.toString();
     }
 }

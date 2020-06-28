@@ -1,6 +1,6 @@
 package Resource_based.Resources;
 
-public abstract class Resource {
+public abstract class Resource { // generic resource with a value and a maximum (pool)
     int max;
     int cur;
     public Resource(int max){

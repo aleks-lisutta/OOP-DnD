@@ -13,7 +13,7 @@ public class Monster extends Enemy {
         super(c,att,def,EXP,name,HP);
         vision_range=v;
     }
-    public char RandomMove(){
+    public char RandomMove(){ //if no player in range move randomly
         Random red=new Random();
         switch (red.nextInt(4)){
             case 0: return Controller.UP;
@@ -23,7 +23,7 @@ public class Monster extends Enemy {
             default: return Controller.WAIT;
         }
     }
-    private String hunt(Player p){
+    private String hunt(Player p){ // if player in vision range hunt player
         String out="";
         double x=frame.getx()-p.getFrame().getx();
         double y=frame.gety()-p.getFrame().gety();
@@ -38,7 +38,7 @@ public class Monster extends Enemy {
         return out;
     }
     @Override // override again in boss
-    public String Turn(Player p) {
+    public String Turn(Player p) { // perform this monster's turn
         String out="";
         if(Utils.RANGE(p.getFrame(),this.frame)<vision_range){
             out+=hunt(p);

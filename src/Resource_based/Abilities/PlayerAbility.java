@@ -6,12 +6,12 @@ import Entity.Tile.Unit;
 
 import java.util.List;
 
-public abstract class PlayerAbility{
-    Player p;
+public abstract class PlayerAbility{ //generic player ability
+    Player p; //holds the player who casts it
     public void setPlayer(Player p){this.p=p;}
-    public abstract String useAbility(List<Unit> ls);
+    public abstract String useAbility(List<Unit> ls); // cast on a list of all enemies in range
     protected abstract boolean canUse();
     public abstract void LevelUp();
     public abstract void Tick();
-    public abstract String attack(Enemy e);
+    public abstract String attack(Enemy e); // cast on single enemy
 }

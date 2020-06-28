@@ -3,7 +3,7 @@ package GameControl;
 import Entity.Enemy.Enemy;
 import Entity.Tile.Tile;
 
-public class Tuple<T,E>{
+public class Tuple<T,E>{ //standard tuple, not native in java
     private T t;
     private E e;
     Tuple(T t, E e){

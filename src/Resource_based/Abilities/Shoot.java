@@ -18,16 +18,11 @@ public class Shoot extends PlayerAbility {
     @Override
     public String useAbility(List<Unit> ls) {
         if (!canUse())
-            return p.getName()+" does not have a arrows.\n";
+            return p.getName()+" does not have any arrows.\n";
         if (ls.size()==0)
-            return "does not exist enemies in his range.\n";
+            return p.getName()+" does not have enemies in range.\n";
         Unit u=selectClosest(ls,p);
-
         String output=u.receiveCast(this);
-        if (output==null){
-            ls.remove(u);
-            return useAbility(ls);
-        }
         arr.use();
         return output;
     }
@@ -36,7 +31,7 @@ public class Shoot extends PlayerAbility {
         if (p.getAtt()>defRoll){
             return e.injured(p.getAtt()-defRoll, p);
         }
-        return e.getName()+" success to def the attack.\n";
+        return e.getName()+" defended against the attack.\n";
     }
     private Unit selectClosest(List<Unit> units,Player p){
         Unit output=units.get(0);

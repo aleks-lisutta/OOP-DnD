@@ -16,6 +16,7 @@ import java.util.function.Supplier;
 public class Utils {
 
     public static List<Supplier<Player>> playerMap = Arrays.asList(//public for testing
+            // map function for players
             () -> new Warrior(30, 4, "Jon Snow", 300, 3),
             () -> new Warrior(20, 6, "The Hound", 400, 5),
             () -> new Mage(5, 1, "Melisandre", 100, 6, 300, 30, 15, 5),
@@ -25,7 +26,7 @@ public class Utils {
             () -> new Hunter(30, 2, "Ygritte", 220, 6)
     );
 
-    private static List<Supplier<Enemy>> enemyMap = Arrays.asList(
+    private static List<Supplier<Enemy>> enemyMap = Arrays.asList( //map function for enemies
             () -> new Boss('K', 300, 150, 5000, "Night’s King", 5000, 8, 10),
             () -> new Boss('C', 10, 10, 1000, "Queen Cersei", 100,1, 1),
             () -> new Boss('M', 60, 25, 500, "The Mountain", 1000, 6,6),
@@ -42,12 +43,13 @@ public class Utils {
     );
 
 
-    public static Double RANGE(TileFrame a, TileFrame b){
+    public static Double RANGE(TileFrame a, TileFrame b){ //find the distance between 2 frames
         double x=(a.getx().doubleValue()-b.getx().doubleValue());
         double y=(a.gety().doubleValue()-b.gety().doubleValue());
         return Math.sqrt(x*x+y*y);
     }
-    public static Tuple<Tile, Enemy> getTile(char c){
+
+    public static Tuple<Tile, Enemy> getTile(char c){ //per char factory to build the board
         switch (c){
             case '.': return new Tuple(new Empty(),null);
             case '#': return new Tuple(new Wall(),null);
@@ -69,12 +71,16 @@ public class Utils {
         }
     }
 
+
     public static Player getPlayer(int i){
         return playerMap.get(i).get();
     }
     public static Enemy getEnemy(int i) { return enemyMap.get(i).get(); }
 
-   /*
+    /*
+
+    //testing factory
+
     public static Tuple getTile(char c){//for testing
         switch (c){
             case 'C':
@@ -92,11 +98,13 @@ public class Utils {
             case '.': return new Tuple(new Empty(),null);
             case '@': return new Tuple(null,null);
             case  '#': return new Tuple(new Wall(),null);
-            case 'K': return new Tuple(new NightsKing(),new NightsKing());
+            case 'K': return new Tuple(getEnemy(0),getEnemy(0));
             default:throw new IllegalArgumentException(c+" char is illegal");
         }
-    }
 
-    */
+    }
+     */
+
+
 
 }

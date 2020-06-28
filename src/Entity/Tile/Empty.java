@@ -11,11 +11,11 @@ public class Empty extends Tile {
     }
 
     @Override
-    public String reciveMove(Enemy e) {
+    public String reciveMove(Enemy e) { //visitor receiver
         swapFrame(e);
         return "";
     }
-    public String reciveMove(Player p) {
+    public String reciveMove(Player p) { //visitor receiver
         swapFrame(p);
         return p.getName()+" walked to position "+p.getFrame().getPos()+"\n";
     }

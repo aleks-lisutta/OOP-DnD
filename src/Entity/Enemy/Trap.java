@@ -23,7 +23,7 @@ public class Trap extends Enemy {
         inVisibility=b;
     }
 
-    public String attack(Player p){
+    public String attack(Player p){ //if player in range attack player and become visible
         String output=p.getName()+" walked withing "+RANGE+" tiles from "+name+" , "+name+" attempting to attack " +p.getName() +"\n";
         if(!visible) {
             visible = true;
@@ -32,23 +32,23 @@ public class Trap extends Enemy {
         tickCounter = 0;
         return output+p.reciveMove(this);
     }
-    public void swapChar(){
+    public void swapChar(){ //upon changing visibility status swap char
         char temp=chr;
         chr=chr2;
         chr2=temp;
     }
-    public String reciveMove(Player p){
+    public String reciveMove(Player p){// visitor receiver, only react if visible
         return visible ? super.reciveMove(p) : p.getName()+" can not move to Tile in position:" +frame.getPos()+" there is an invisible trap in the way.";
     }
 
     @Override
-    public String Turn(Player p) {
+    public String Turn(Player p) { //this trap performs its turn
         if (Utils.RANGE(frame,p.getFrame())<RANGE) {
             return attack(p);
         }
         return setStatus();
     }
-    public String setStatus(){
+    public String setStatus(){ //set visibility status
         if (visible &tickCounter>visibility){
             tickCounter=tickCounter-visibility;
             visible=false;

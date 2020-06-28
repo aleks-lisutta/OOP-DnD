@@ -16,14 +16,14 @@ public class Boss extends Monster implements Heroic {
     public Boss(char c, int att, int def, int EXP, String name, int HP, int v,int f) {
         super(c, att, def, EXP, name, HP, v);
         frequency=f;
-        tick=0;
+        tick=f; // boss starts with ability ready
         ability=new BossAbility();
         ability.SetBoss(this);
     }
 
 
     @Override
-    public String cast(List<Unit> ls) {
+    public String cast(List<Unit> ls) { // cast this bosses ability
         if (ls==null)
             throw  new IllegalArgumentException("boss accept null");
         if (ls.size()>0) {
@@ -32,18 +32,19 @@ public class Boss extends Monster implements Heroic {
         }
         return "";
     }
-    public String Turn(Player p){
-        if(Utils.RANGE(p.getFrame(),this.frame)<vision_range & tick==frequency){
+    public String Turn(Player p){ //this boss performs its turn
+        if(Utils.RANGE(p.getFrame(),frame)<vision_range & tick==frequency){ // if player in range and ability ready cast ability
             List<Unit> u=new LinkedList<>();
             u.add(p);
             String output=cast(u);
             Tick();
             return output;
         }
-        return super.Turn(p);
+        Tick();
+        return super.Turn(p); //if player not in range or ability not ready act normally
     }
 
-    public void Tick(){
+    public void Tick(){ //advance ability tick
         if (tick<frequency)
             tick++;
     }

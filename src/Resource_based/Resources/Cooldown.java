@@ -10,5 +10,4 @@ public class Cooldown extends Resource {
         setCur(cur-1);
     }
     public void LevelUp(){setCur(0);}
-
 }

@@ -10,51 +10,55 @@ public class Service {
     public Scanner scan;
     public String path;
 
-    public Service(String path){
+    public Service(String path){//the path is the folder with the level.
         menu= new Menu();
         scan=new Scanner(System.in);
         this.path=path;
     }
+
     public void Start(){
         choosePlayer();
         startGame();
     }
-    public void choosePlayer(){
+    public void choosePlayer(){//the part where the user chooses his character
         boolean chosen=false;
-        while(!chosen) {
+        while(!chosen) { // continue asking until a proper character name is entered
             System.out.println(menu.options());
             try {
-                con = new Controller(menu.getPlayer(scan.nextLine()),path);
+                con = new Controller(menu.getPlayer(scan.nextLine()),path); // create a new controller for the chosen player
                 chosen=true;
             }
             catch(Exception e){
-                e.printStackTrace();
                 System.out.println("invalid player name, please try again.\n");
             }
         }
     }
     
-    public void startGame(){
-        String output="";
-        while(!con.finish()){
-            System.out.println(con.display());
+    public void startGame(){ // start the game
+        StringBuilder output=new StringBuilder();
+        while(!con.finish()){ //main game loop
+            System.out.println(con.display()); //display the board
             try {
-                output=con.action(scan.nextLine());
+                output.append(con.action(scan.nextLine())); // ask the user for an action and if the action is legal perform it
             } catch (Exception e) {
-                System.out.print("invalid move entered, please try again.\n");
+                System.out.print("invalid move entered, "+con.getPlayerName()+" did nothing.\n");
             }
-            output+="\n";
-            output+=con.enemyTurn();
-            output+=con.stats();
-            output+=con.endLevel();
+            output.append("\n");
+            output.append(con.enemyTurn()); // run all enemy turns
+            output.append(con.stats());//display player stats at the end of the round
+            output.append(con.endLevel()); //check if the game should progress to the next lvl or end
 
-            System.out.println(output);
-            output="";
+            System.out.println(output.toString()); //print everything to the screen
+            output=new StringBuilder(); //reset output for next round
         }
-        System.out.println("would you like to play again?\n press y to play again, press any other button to leave.\n");
+        System.out.println("would you like to play again?\n press y to play again, press n other button to leave.\n");
         String s=scan.nextLine();
-        if(s.length()>0 && s.charAt(0)=='y'){
-            Start();
+
+        while(s.length()!=1 || (s.charAt(0)!='y' & s.charAt(0)!='n')) { // loop for repeating the game or quitting
+            System.out.println("\ninvalid answer entered,  please choose y or n.\n");
+            s = scan.nextLine();
         }
+        if (s.charAt(0)=='y')
+            Start();
     }
 }
